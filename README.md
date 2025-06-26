@@ -1,5 +1,5 @@
 # tech-with-biniyam-portfolio
-# Biniyam Kebede's Data Platform Portfolio
+# Biniyam Kebede's Data Engineering Portfolio
 
 <p align="center">
   <a href="https://www.linkedin.com/in/[your-linkedin-profile]/">
