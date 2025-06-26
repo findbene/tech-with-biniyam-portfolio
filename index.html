@@ -1,140 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Engineer & Analyst Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .hero {
-      background-color: #0d6efd;
-      color: white;
-      padding: 60px 20px;
-    }
-    .section {
-      padding: 60px 20px;
-    }
-    .badge {
-      font-size: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biniyam Kebede - Data Engineering Professional</title>
+    <meta name="description" content="Professional Data Engineer specializing in AWS, Python, Snowflake, and Power Platform solutions.">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- General Styling & Variables --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-dark: #0f172a;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+        }
+
+        /* --- Dark Mode Variables --- */
+        body.dark-mode {
+            --text-primary: #f8fafc;
+            --text-secondary: #9ca3af;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85); /* Slightly less transparent */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .header {
+            background: rgba(15, 23, 42, 0.85);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-right-cluster {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* --- Dark Mode Toggle --- */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .theme-switch {
+            display: inline-block;
+            height: 24px;
+            position: relative;
+            width: 48px;
+        }
+        .theme-switch input {
+            display:none;
+        }
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 16px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 16px;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* --- Project Modal Styling --- */
+        .project-modal {
+            border: none;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        .project-modal::backdrop {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+        }
+        .project-modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        .modal-content img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+        }
+        .modal-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* --- All other styles from your original code --- */
+        /* (Copied from your provided stylesheet for brevity, with minor tweaks for dark mode) */
+        .resume-btn{background:var(--gradient);color:white;padding:.75rem 1.5rem;border-radius:var(--border-radius);text-decoration:none;font-weight:600;transition:all .3s ease;box-shadow:var(--shadow)}.resume-btn:hover{transform:translateY(-2px);box-shadow:0 15px 35px rgba(0,0,0,.2)}.hero{background:var(--gradient);color:white;padding:120px 0 80px;text-align:center;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,0 1000,80 1000,100 0,100"/></svg>') no-repeat bottom;background-size:cover}.hero-content{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:2}.profile-photo{width:180px;height:180px;border-radius:50%;margin:0 auto 2rem;border:6px solid rgba(255,255,255,.3);background-size:cover;background-position:center;transition:all .3s ease}.profile-photo:hover{transform:scale(1.05);border-color:rgba(255,255,255,.5)}.hero h1{font-size:3.5rem;margin-bottom:1rem;font-weight:700;animation:fadeInUp 1s ease}.hero .subtitle{font-size:1.3rem;margin-bottom:2rem;opacity:.9;animation:fadeInUp 1s ease .2s both}.hero .description{font-size:1.1rem;max-width:600px;margin:0 auto 2rem;opacity:.8;animation:fadeInUp 1s ease .4s both}.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1s ease .6s both}.btn{padding:1rem 2rem;border-radius:var(--border-radius);text-decoration:none;font-weight:600;transition:all .3s ease;display:inline-flex;align-items:center;gap:.5rem}.btn-primary{background:rgba(255,255,255,.2);color:white;border:2px solid rgba(255,255,255,.3)}.btn-primary:hover{background:rgba(255,255,255,.3);transform:translateY(-2px)}.btn-secondary{background:white;color:var(--primary-color)}.btn-secondary:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.section{padding:80px 0}.section:nth-child(odd){background:var(--bg-secondary)}
+        body.dark-mode .section:nth-child(odd){background: var(--bg-secondary);} /* Ensure alternating bg works in dark mode */
+        .container{max-width:1200px;margin:0 auto;padding:0 2rem}.section-title{text-align:center;font-size:2.5rem;font-weight:700;margin-bottom:3rem;color:var(--text-primary);position:relative}.section-title::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:var(--gradient);border-radius:2px}.about-content{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:center}.about-text{font-size:1.1rem;line-height:1.8;margin-bottom:2rem}.about-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}.stat-item{text-align:center;padding:1.5rem;background:var(--bg-primary);border-radius:var(--border-radius);box-shadow:var(--shadow);transition:transform .3s ease}.stat-item:hover{transform:translateY(-5px)}.stat-number{font-size:2rem;font-weight:700;color:var(--primary-color);display:block}.stat-label{color:var(--text-secondary);font-size:.9rem}.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-bottom:3rem}.skill-category{background:var(--bg-primary);padding:2rem;border-radius:var(--border-radius);box-shadow:var(--shadow);transition:transform .3s ease}.skill-category:hover{transform:translateY(-5px)}.skill-category h3{color:var(--primary-color);margin-bottom:1.5rem;font-size:1.3rem;display:flex;align-items:center;gap:.5rem}.skill-list{display:flex;flex-wrap:wrap;gap:.5rem}.skill-tag{background:var(--bg-secondary);padding:.5rem 1rem;border-radius:20px;font-size:.9rem;color:var(--text-primary);border:2px solid transparent;transition:all .3s ease}.skill-tag:hover{border-color:var(--primary-color);background:var(--primary-color);color:white}.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem}.project-card{background:var(--bg-primary);border-radius:var(--border-radius);overflow:hidden;box-shadow:var(--shadow);transition:all .3s ease; cursor: pointer;}.project-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,.15)}.project-image{height:200px;background-size: cover; background-position: center; display:flex;align-items:center;justify-content:center;color:white;font-size:3rem;}.project-content{padding:1.5rem}.project-title{font-size:1.3rem;font-weight:600;margin-bottom:.5rem;color:var(--text-primary)}.project-category{color:var(--primary-color);font-size:.9rem;font-weight:500;margin-bottom:1rem}.project-description{color:var(--text-secondary);line-height:1.6;margin-bottom:1rem}.project-tech{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}.tech-tag{background:var(--bg-secondary);padding:.25rem .75rem;border-radius:15px;font-size:.8rem;color:var(--text-secondary)}.project-links{display:flex;gap:1rem}.project-link{color:var(--primary-color);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.25rem;font-size:.9rem}.project-link:hover{text-decoration:underline}.timeline{max-width:800px;margin:0 auto; position: relative; padding-left: 30px;}.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:4px;background:var(--bg-secondary);border-radius:2px;}.timeline-item{background:var(--bg-primary);padding:2rem;border-radius:var(--border-radius);box-shadow:var(--shadow);margin-bottom:2rem;position:relative;transition:transform .3s ease}.timeline-item:hover{transform:translateX(10px)}.timeline-item::before{content:'';position:absolute;left:-30px;top:2rem;width:20px;height:20px;background:var(--primary-color);border-radius:50%;border: 4px solid var(--bg-secondary);}.timeline-date{color:var(--primary-color);font-weight:600;font-size:.9rem;margin-bottom:.5rem}.timeline-title{font-size:1.3rem;font-weight:600;margin-bottom:.5rem}.timeline-company{color:var(--text-secondary);font-weight:500;margin-bottom:1rem}.timeline-description{color:var(--text-secondary);line-height:1.6}.contact{background:var(--bg-dark);color:white}.contact .section-title{color:white}.contact-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem}.contact-info h3{margin-bottom:1.5rem;color:var(--accent-color)}.contact-item{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;padding:1rem;background:rgba(255,255,255,.1);border-radius:var(--border-radius)}.contact-item i{color:var(--accent-color);font-size:1.2rem}.contact-form{display:grid;gap:1rem}.form-group{display:grid;gap:.5rem}.form-group label{font-weight:500;color:var(--accent-color)}.form-control{padding:1rem;border:2px solid rgba(255,255,255,.2);border-radius:var(--border-radius);background:rgba(255,255,255,.1);color:white;font-size:1rem}.form-control:focus{outline:none;border-color:var(--accent-color)}.form-control::placeholder{color:rgba(255,255,255,.6)}.textarea.form-control{resize:vertical;min-height:120px}.submit-btn{background:var(--gradient);color:white;padding:1rem 2rem;border:none;border-radius:var(--border-radius);font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s ease}.submit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.3)}.footer{background:var(--bg-dark);color:rgba(255,255,255,.8);text-align:center;padding:2rem 0;border-top:1px solid rgba(255,255,255,.1)}.social-links{display:flex;justify-content:center;gap:1rem;margin-bottom:1rem}.social-link{display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;background:rgba(255,255,255,.1);color:white;border-radius:50%;text-decoration:none;transition:all .3s ease}.social-link:hover{background:var(--primary-color);transform:translateY(-3px)}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.fade-in{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}.fade-in.visible{opacity:1;transform:translateY(0)}@media (max-width:768px){.nav-menu{display:none}.hero h1{font-size:2.5rem}.hero .subtitle{font-size:1.1rem}.about-content{grid-template-columns:1fr;gap:2rem}.about-stats{grid-template-columns:1fr}.contact-content{grid-template-columns:1fr;gap:2rem}.cta-buttons{flex-direction:column;align-items:center}.timeline-item:hover{transform:none}}@media (max-width:480px){.container,.nav-container{padding:0 1rem}.hero{padding:100px 0 60px}.section{padding:60px 0}.projects-grid,.skills-grid{grid-template-columns:1fr}}
+
+    </style>
 </head>
 <body>
-  <header class="hero text-center">
-    <h1>Biniyam Kebede</h1>
-    <p>Certified Data Engineer & Analyst | Cloud & Power Platform Professional</p>
-    <a href="resume.pdf" class="btn btn-light mt-3" download>Download Resume</a>
-  </header>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">Biniyam Kebede</div>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-right-cluster">
+                <!-- NEW: Dark Mode Toggle -->
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+                <a href="#" class="resume-btn" id="resume-download-btn">
+                    <i class="fas fa-download"></i> Resume
+                </a>
+            </div>
+        </nav>
+    </header>
 
-  <section class="section container" id="bio">
-    <h2>About Me</h2>
-    <p>I am a certified Data Engineer and Analyst with hands-on experience in building automated data pipelines, interactive dashboards, and enterprise-grade applications using Python, SQL, Power Platform, and cloud technologies. I bring experience from e-commerce and healthcare sectors, solving complex business problems with data-driven solutions.</p>
-  </section>
-
-  <section class="section bg-light" id="skills">
-    <div class="container">
-      <h2>Skills & Tools</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <ul>
-            <li>Python, SQL, dbt</li>
-            <li>Apache Spark, Airflow</li>
-            <li>Power BI, Power Apps, Power Automate</li>
-            <li>ETL/ELT, Data Modeling, Data Pipelines</li>
-          </ul>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- UPDATE: Replace with your professional headshot URL -->
+            <div class="profile-photo" style="background-image: url('images/profile-photo.jpg');">
+            </div>
+            <h1>Biniyam Kebede</h1>
+            <p class="subtitle">Cloud-Certified Data Engineer</p>
+            <p class="description">
+                Building scalable, automated data pipelines using Python, SQL, & AWS. 
+                Transforming raw data into actionable insights through advanced engineering solutions.
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
+                <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
+            </div>
         </div>
-        <div class="col-md-6">
-          <ul>
-            <li>AWS, Azure</li>
-            <li>API Integration, Real-Time & Batch Processing</li>
-            <li>Data Quality & Monitoring</li>
-            <li>Excel, Git/GitHub, Jupyter, VS Code</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section container" id="certifications">
-    <h2>Certifications</h2>
-    <ul>
-      <li>Microsoft Certified: Power Platform Fundamentals (PL-900)</li>
-      <li>Microsoft Azure Fundamentals (AZ-900)</li>
-      <li>AWS Certified Cloud Practitioner</li>
-    </ul>
-  </section>
-
-  <section class="section bg-light" id="projects">
-    <div class="container">
-      <h2>Featured Projects</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <h5>Real-Time E-Commerce Streaming Analytics</h5>
-          <p>Built a Kafka-Spark pipeline for real-time tracking of orders and fraud detection. Improved decision-making for marketing teams.</p>
-          <a href="https://github.com/yourusername/ecommerce-streaming" target="_blank">View on GitHub</a>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-stats">
+                    <div class="stat-item fade-in">
+                        <!-- NEW: Dynamic Experience Counter -->
+                        <span class="stat-number" id="years-experience">8+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <span class="stat-number">6+</span>
+                        <span class="stat-label">Major Projects</span>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Technologies Mastered</span>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Cloud Certifications</span>
+                    </div>
+                </div>
+                <div>
+                    <p class="about-text fade-in">
+                        I'm a cloud-certified Data Engineer with extensive experience in building scalable, automated data pipelines 
+                        using Python, SQL, and AWS. My expertise spans across real-time data processing, ETL/ELT pipeline development, 
+                        and comprehensive business intelligence solutions using the Microsoft Power Platform.
+                    </p>
+                    <p class="about-text fade-in">
+                        With a strong background in both technical implementation and business collaboration, I specialize in 
+                        transforming complex data challenges into elegant solutions that drive measurable business value. 
+                        From HIPAA-compliant healthcare systems to high-volume e-commerce analytics, I deliver reliable, 
+                        scalable data infrastructure that empowers data-driven decision making.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-          <h5>Healthcare Data Lake on AWS</h5>
-          <p>Created a cost-efficient S3 + Redshift data lake. Automated data quality checks and reduced storage costs by 15%.</p>
-          <a href="https://github.com/yourusername/healthcare-data-lake" target="_blank">View on GitHub</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section container" id="badges">
-    <h2>Live Skills Snapshot</h2>
-    <canvas id="skillsChart" height="100"></canvas>
-  </section>
-
-  <section class="section bg-light" id="contact">
-    <div class="container">
-      <h2>Contact Me</h2>
-      <form>
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name">
+    <!-- Skills Section (No major changes needed, it's well-structured) -->
+    <section id="skills" class="section">
+        <!-- ... Your skills section code remains the same ... -->
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-database"></i> Data Engineering</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Apache Spark</span><span class="skill-tag">Apache Kafka</span><span class="skill-tag">Apache Airflow</span><span class="skill-tag">ETL/ELT</span><span class="skill-tag">PySpark</span><span class="skill-tag">Pandas</span><span class="skill-tag">FastAPI</span><span class="skill-tag">Boto3</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">Docker</span><span class="skill-tag">dbt</span><span class="skill-tag">Data Modeling</span><span class="skill-tag">Data Warehousing</span><span class="skill-tag">Git</span><span class="skill-tag">CI/CD</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-cloud"></i> Cloud Platforms</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">AWS S3</span><span class="skill-tag">AWS Lambda</span><span class="skill-tag">AWS EMR</span><span class="skill-tag">AWS Kinesis</span><span class="skill-tag">AWS API Gateway</span><span class="skill-tag">AWS Redshift</span><span class="skill-tag">AWS Step Functions</span><span class="skill-tag">AWS SNS</span><span class="skill-tag">AWS SQS</span><span class="skill-tag">AWS IAM</span><span class="skill-tag">Snowflake</span><span class="skill-tag">Azure</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-bolt"></i> Power Platform & BI</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Power BI</span><span class="skill-tag">DAX</span><span class="skill-tag">Power Query</span><span class="skill-tag">Microsoft Power Platform</span><span class="skill-tag">Data Visualization</span><span class="skill-tag">Business Intelligence</span><span class="skill-tag">Dashboard Development</span><span class="skill-tag">KPI Development</span><span class="skill-tag">Self-Service Analytics</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-cogs"></i> Additional Technologies</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">HTML/CSS</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Data Quality & Validation</span><span class="skill-tag">Star Schema</span><span class="skill-tag">Real-Time Processing</span><span class="skill-tag">Batch Processing</span><span class="skill-tag">OOP Principles</span><span class="skill-tag">HIPAA Compliance</span><span class="skill-tag">PowerShell</span><span class="skill-tag">Bash</span><span class="skill-tag">Jira</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email">
-        </div>
-        <div class="mb-3">
-          <label for="message" class="form-label">Message</label>
-          <textarea class="form-control" id="message" rows="4"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Send</button>
-      </form>
-    </div>
-  </section>
+    </section>
 
-  <footer class="text-center p-4">
-    <p>Connect with me on <a href="https://github.com/yourusername">GitHub</a> | <a href="https://linkedin.com/in/yourusername">LinkedIn</a></p>
-  </footer>
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- UPDATE: data-modal-id links card to the dialog. Replace image URLs -->
+                <div class="project-card fade-in" data-modal-id="project1-modal">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1000&auto=format&fit=crop');"></div>
+                    <div class="project-content">
+                        <div class="project-category">Data Engineering</div>
+                        <h3 class="project-title">Event-Driven Data Ingestion Pipeline</h3>
+                        <p class="project-description">Architected a scalable, serverless pipeline to ingest real-time data streams via AWS API Gateway and process them with low latency.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AWS Lambda</span><span class="tech-tag">API Gateway</span><span class="tech-tag">S3</span><span class="tech-tag">SQS</span><span class="tech-tag">Snowflake</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in" data-modal-id="project2-modal">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop');"></div>
+                    <div class="project-content">
+                        <div class="project-category">Business Intelligence</div>
+                        <h3 class="project-title">Interactive Sales Analytics Dashboard</h3>
+                        <p class="project-description">Built a multi-page interactive dashboard in Power BI, connected to Snowflake, which reduced ad-hoc reporting requests by 30%.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Power BI</span><span class="tech-tag">DAX</span><span class="tech-tag">Power Query</span><span class="tech-tag">Snowflake</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in" data-modal-id="project3-modal">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1583521214690-73421a1829a9?q=80&w=1000&auto=format&fit=crop');"></div>
+                    <div class="project-content">
+                        <div class="project-category">Data Engineering</div>
+                        <h3 class="project-title">ETL Modernization with dbt & Snowflake</h3>
+                        <p class="project-description">Developed a modular dbt project with custom data quality tests, reducing manual validation effort by 95% and improving query performance.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">dbt</span><span class="tech-tag">Snowflake</span><span class="tech-tag">SQL</span><span class="tech-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    const ctx = document.getElementById('skillsChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Python', 'SQL', 'Power BI', 'Power Apps', 'Airflow', 'Spark', 'dbt', 'AWS', 'Azure'],
-        datasets: [{
-          label: 'Skill Level (0-10)',
-          data: [9, 9, 8, 8, 7, 8, 7, 8, 7],
-          backgroundColor: 'rgba(13, 110, 253, 0.6)'
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: { beginAtZero: true }
+    <!-- NEW/RESTRUCTURED: Experience & Education Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience & Education</h2>
+            <div class="timeline">
+                <!-- Add your professional experience here -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">2020 - Present</div>
+                    <h3 class="timeline-title">Senior Data Engineer</h3>
+                    <div class="timeline-company">Tech Solutions Inc.</div>
+                    <p class="timeline-description">
+                        Lead engineer on the cloud data platform team. Architected and maintained ETL/ELT pipelines processing terabytes of data daily. Collaborated with stakeholders to define data requirements and deliver BI solutions.
+                    </p>
+                </div>
+                <!-- This is the education content from your original code, now properly integrated -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">Current</div>
+                    <h3 class="timeline-title">AWS Certified Cloud Practitioner</h3>
+                    <div class="timeline-company">Amazon Web Services (CLF-C02)</div>
+                    <p class="timeline-description">Comprehensive understanding of AWS cloud services, architecture principles, and best practices.</p>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">Current</div>
+                    <h3 class="timeline-title">Microsoft Certified: Azure Fundamentals</h3>
+                    <div class="timeline-company">Microsoft (AZ-900)</div>
+                    <p class="timeline-description">Foundational knowledge of cloud services and Azure platform capabilities for data solutions.</p>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">Bachelor's Degree</div>
+                    <h3 class="timeline-title">Bachelor of Science in Applied Physics</h3>
+                    <div class="timeline-company">Addis Ababa University, Ethiopia</div>
+                    <p class="timeline-description">Minor in Mathematics. Strong foundation in analytical thinking and problem-solving.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>I'm currently open to new opportunities. Feel free to reach out via email or connect with me on LinkedIn.</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>YOUR_EMAIL@EXAMPLE.COM</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>linkedin.com/in/your-profile</span>
+                    </div>
+                </div>
+                <!-- CORRECTED: Added form tag and submission logic -->
+                <form class="contact-form" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="john.doe@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                    <p id="form-status" style="margin-top: 1rem;"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <!-- UPDATE: Add your real social media links -->
+                <a href="https://github.com/findbene" target="_blank" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>© 2024 Biniyam Kebede. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- NEW: Project Modals -->
+    <dialog id="project1-modal" class="project-modal">
+        <div class="modal-content">
+            <button class="project-modal-close-btn" onclick="this.closest('dialog').close()">×</button>
+            <h3>Event-Driven Data Ingestion Pipeline</h3>
+            <p>This project demonstrates a robust, serverless architecture for handling real-time data on AWS. It's designed for high throughput, scalability, and fault tolerance.</p>
+            
+            <h4>Architecture Diagram:</h4>
+            <!-- UPDATE: Replace with a real architecture diagram image -->
+            <img src="https://via.placeholder.com/700x400.png?text=AWS+Pipeline+Architecture+Diagram" alt="Architecture Diagram">
+            
+            <h4>Key Features & Outcomes:</h4>
+            <ul>
+                <li><strong>Technology Stack:</strong> AWS API Gateway, Lambda, SQS, S3, Snowflake, Python.</li>
+                <li><strong>Scalability:</strong> Processed over 1 million events per day during peak load tests.</li>
+                <li><strong>Low Latency:</strong> End-to-end data availability in the warehouse in under 2 minutes.</li>
+                <li><strong>Cost-Effective:</strong> Serverless design minimizes idle costs, paying only for execution time.</li>
+            </ul>
+            <a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+    </dialog>
+    <!-- Add more dialogs for other projects -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- SCRIPT 1: Fade-in Animation on Scroll ---
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.2, // Trigger when 20% of the element is visible
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // --- SCRIPT 2: Resume Download Functionality ---
+        const resumeBtn = document.getElementById('resume-download-btn');
+        resumeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // UPDATE: Replace with the actual path to your resume file
+            const resumeUrl = '"C:\Users\findb\OneDrive\Documents\Certifications\Biniyam_Kebede_Resume.pdf"'; 
+            const link = document.createElement('a');
+            link.href = resumeUrl;
+            link.download = 'Biniyam_Kebede_Resume.pdf'; // The filename for the download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // --- SCRIPT 3: Functional Contact Form ---
+        const form = document.querySelector('.contact-form');
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const status = document.getElementById('form-status');
+            const data = new FormData(event.target);
+            try {
+                const response = await fetch(event.target.action, {
+                    method: form.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    status.innerHTML = "Thanks for your submission!";
+                    form.reset();
+                } else {
+                    const responseData = await response.json();
+                    if (Object.hasOwn(responseData, 'errors')) {
+                        status.innerHTML = responseData["errors"].map(error => error["message"]).join(", ");
+                    } else {
+                        status.innerHTML = "Oops! There was a problem submitting your form";
+                    }
+                }
+            } catch (error) {
+                status.innerHTML = "Oops! There was a problem submitting your form";
+            }
         }
-      }
+        form.addEventListener("submit", handleSubmit);
+
+        // --- SCRIPT 4: Project Modal Logic ---
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const modalId = card.getAttribute('data-modal-id');
+                if (modalId) {
+                    const modal = document.getElementById(modalId);
+                    modal.showModal();
+                }
+            });
+        });
+        
+        // Close modal on outside click
+        const dialogs = document.querySelectorAll('dialog');
+        dialogs.forEach(dialog => {
+            dialog.addEventListener('click', (event) => {
+                if (event.target === dialog) {
+                    dialog.close();
+                }
+            });
+        });
+
+        // --- SCRIPT 5: Dynamic Years of Experience ---
+        const experienceSpan = document.getElementById('years-experience');
+        const startDate = new Date('2016-01-01'); // UPDATE: Change to your career start date
+        const currentYear = new Date().getFullYear();
+        const startYear = startDate.getFullYear();
+        const years = currentYear - startYear;
+        if(years > 0) {
+            experienceSpan.textContent = `${years}+`;
+        }
+
+        // --- SCRIPT 6: Dark Mode Toggle ---
+        const themeToggle = document.getElementById('checkbox');
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.body.classList.add(currentTheme);
+            if (currentTheme === 'dark-mode') {
+                themeToggle.checked = true;
+            }
+        }
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light-mode');
+            }
+        });
     });
-  </script>
+    </script>
 </body>
 </html>
