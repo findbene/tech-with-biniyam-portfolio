@@ -80,9 +80,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <!-- FIX: The defective comment is removed. This path will work if 'Head-shot.jpg' is in the same folder as this HTML file. -->
             <div class="profile-photo" style="background-image: url('Head-shot.jpg');"></div>
-
             <h1>Biniyam Kebede</h1>
             <p class="subtitle">Cloud-Certified Data Engineer</p>
             <p class="description">Building scalable, automated data pipelines using Python, SQL, & AWS. Transforming raw data into actionable insights through advanced engineering solutions.</p>
@@ -147,7 +145,23 @@
                 localStorage.setItem('theme', 'dark-mode');
             }
         });
-        const faders=document.querySelectorAll('.fade-in');const appearOptions={threshold:0.2,rootMargin:"0px 0px -50px 0px"};const appearOnScroll=new IntersectionObserver(function(e,t){e.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');t.unobserve(e.target)})},appearOptions);faders.forEach(e=>{appearOnScroll.observe(e)});const resumeBtn=document.getElementById('resume-download-btn');resumeBtn.addEventListener('click',e=>{e.preventDefault();const t='./assets/Biniyam_Kebede_Resume.pdf',o=document.createElement('a');o.href=t;o.download='Biniyam_Kebede_Resume.pdf';document.body.appendChild(o);o.click();document.body.removeChild(o)});const form=document.querySelector('.contact-form');async function handleSubmit(e){e.preventDefault();const t=document.getElementById('form-status'),o=new FormData(e.target);try{const n=await fetch(e.target.action,{method:form.method,body:o,headers:{'Accept':'application/json'}});if(n.ok){t.innerHTML="Thanks for your submission!";form.reset()}else{const a=await n.json();t.innerHTML=a.errors?a.errors.map(e=>e.message).join(", "):"Oops! There was a problem."}}catch(r){t.innerHTML="Oops! There was a problem submitting your form"}}form.addEventListener("submit",handleSubmit);const projectCards=document.querySelectorAll('.project-card');projectCards.forEach(e=>{e.addEventListener('click',()=>{const t=e.getAttribute('data-modal-id');if(t)document.getElementById(t)?.showModal()})});const dialogs=document.querySelectorAll('dialog');dialogs.forEach(e=>{e.addEventListener('click',t=>{if(t.target===e)e.close()})});const experienceSpan=document.getElementById('years-experience'),startDate=new Date('2016-01-01'),years=(new Date).getFullYear()-startDate.getFullYear();if(years>0)experienceSpan.textContent=`${years}+`;
+        const faders=document.querySelectorAll('.fade-in');const appearOptions={threshold:0.2,rootMargin:"0px 0px -50px 0px"};const appearOnScroll=new IntersectionObserver(function(e,t){e.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');t.unobserve(e.target)})},appearOptions);faders.forEach(e=>{appearOnScroll.observe(e)});
+        
+        // FIX: Resume download path is now corrected.
+        const resumeBtn=document.getElementById('resume-download-btn');
+        resumeBtn.addEventListener('click',e=>{
+            e.preventDefault();
+            // This path will work if 'Biniyam-Kebede-resume.pdf' is in the same folder as this index.html file.
+            const resumeUrl = './Biniyam-Kebede-resume.pdf'; 
+            const link = document.createElement('a');
+            link.href = resumeUrl;
+            link.download = 'Biniyam-Kebede-resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        const form=document.querySelector('.contact-form');async function handleSubmit(e){e.preventDefault();const t=document.getElementById('form-status'),o=new FormData(e.target);try{const n=await fetch(e.target.action,{method:form.method,body:o,headers:{'Accept':'application/json'}});if(n.ok){t.innerHTML="Thanks for your submission!";form.reset()}else{const a=await n.json();t.innerHTML=a.errors?a.errors.map(e=>e.message).join(", "):"Oops! There was a problem."}}catch(r){t.innerHTML="Oops! There was a problem submitting your form"}}form.addEventListener("submit",handleSubmit);const projectCards=document.querySelectorAll('.project-card');projectCards.forEach(e=>{e.addEventListener('click',()=>{const t=e.getAttribute('data-modal-id');if(t)document.getElementById(t)?.showModal()})});const dialogs=document.querySelectorAll('dialog');dialogs.forEach(e=>{e.addEventListener('click',t=>{if(t.target===e)e.close()})});const experienceSpan=document.getElementById('years-experience'),startDate=new Date('2016-01-01'),years=(new Date).getFullYear()-startDate.getFullYear();if(years>0)experienceSpan.textContent=`${years}+`;
     });
     </script>
 </body>
