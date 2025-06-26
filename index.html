@@ -75,29 +75,7 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">Biniyam Kebede</div>
-            <ul class="nav-menu">
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-right-cluster">
-                <div class="theme-switch-wrapper">
-                    <label class="theme-switch" for="checkbox">
-                        <input type="checkbox" id="checkbox" />
-                        <div class="slider round"></div>
-                    </label>
-                </div>
-                <a href="./Biniyam_Kebede_Resume.pdf" class="resume-btn" download>
-                    <i class="fas fa-download"></i> Resume
-                </a>
-            </div>
-        </nav>
-    </header>
+    <header class="header"><nav class="nav-container"><div class="logo">Biniyam Kebede</div><ul class="nav-menu"><li><a href="#about" class="nav-link">About</a></li><li><a href="#skills" class="nav-link">Skills</a></li><li><a href="#projects" class="nav-link">Projects</a></li><li><a href="#experience" class="nav-link">Experience</a></li><li><a href="#contact" class="nav-link">Contact</a></li></ul><div class="nav-right-cluster"><div class="theme-switch-wrapper"><label class="theme-switch" for="checkbox"><input type="checkbox" id="checkbox" /><div class="slider round"></div></label></div><a href="./Biniyam_Kebede_Resume.pdf" class="resume-btn" download><i class="fas fa-download"></i> Resume</a></div></nav></header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -137,7 +115,37 @@
     <section id="experience" class="section"><div class="container"><h2 class="section-title">Experience & Education</h2><div class="timeline"><div class="timeline-item fade-in"><div class="timeline-date">2020 - Present</div><h3 class="timeline-title">Senior Data Engineer</h3><div class="timeline-company">Tech Solutions Inc.</div><p class="timeline-description">Lead engineer on the cloud data platform team. Architected and maintained ETL/ELT pipelines processing terabytes of data daily. Collaborated with stakeholders to define data requirements and deliver BI solutions.</p></div><div class="timeline-item fade-in"><div class="timeline-date">Current</div><h3 class="timeline-title">AWS Certified Cloud Practitioner</h3><div class="timeline-company">Amazon Web Services (CLF-C02)</div><p class="timeline-description">Comprehensive understanding of AWS cloud services, architecture principles, and best practices.</p></div><div class="timeline-item fade-in"><div class="timeline-date">Current</div><h3 class="timeline-title">Microsoft Certified: Azure Fundamentals</h3><div class="timeline-company">Microsoft (AZ-900)</div><p class="timeline-description">Foundational knowledge of cloud services and Azure platform capabilities for data solutions.</p></div><div class="timeline-item fade-in"><div class="timeline-date">Bachelor's Degree</div><h3 class="timeline-title">Bachelor of Science in Applied Physics</h3><div class="timeline-company">Addis Ababa University, Ethiopia</div><p class="timeline-description">Minor in Mathematics. Strong foundation in analytical thinking and problem-solving.</p></div></div></div></section>
     
     <!-- Contact Section -->
-    <section id="contact" class="section contact"><div class="container"><h2 class="section-title">Get In Touch</h2><div class="contact-content"><div class="contact-info"><h3>Contact Information</h3><p>I'm currently open to new opportunities. Feel free to reach out via email, phone, or connect with me on LinkedIn.</p><a href="mailto:findbene@gmail.com" class="contact-link"><div class="contact-item"><i class="fas fa-envelope"></i><span>findbene@gmail.com</span></div></a><a href="https://www.linkedin.com/in/byka" target="_blank" rel="noopener noreferrer" class="contact-link"><div class="contact-item"><i class="fab fa-linkedin"></i><span>linkedin.com/in/byka</span></div></a><a href="tel:+14046030407" class="contact-link"><div class="contact-item"><i class="fas fa-phone"></i><span>+1 (404) 603-0407</span></div></a></div><form class="contact-form" action="https://formspree.io/f/xzzgypry" method="POST"><div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required></div><div class="form-group"><label for="email">Your Email</label><input type="email" id="email" name="email" class="form-control" placeholder="john.doe@email.com" required></div><div class="form-group"><label for="message">Message</label><textarea id="message" name="message" class="form-control" placeholder="Your message here..." required></textarea></div><button type="submit" class="submit-btn">Send Message</button><p id="form-status" style="margin-top: 1rem;"></p></form></div></div></section>
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>I'm currently open to new opportunities. Feel free to reach out via email, phone, or connect with me on LinkedIn.</p>
+                    <a href="mailto:findbene@gmail.com" class="contact-link"><div class="contact-item"><i class="fas fa-envelope"></i><span>findbene@gmail.com</span></div></a>
+                    <a href="https://www.linkedin.com/in/byka" target="_blank" rel="noopener noreferrer" class="contact-link"><div class="contact-item"><i class="fab fa-linkedin"></i><span>linkedin.com/in/byka</span></div></a>
+                    <a href="tel:+14046030407" class="contact-link"><div class="contact-item"><i class="fas fa-phone"></i><span>+1 (404) 603-0407</span></div></a>
+                </div>
+                <!-- FIX: The form 'action' attribute now contains your confirmed Formspree URL. -->
+                <form class="contact-form" action="https://formspree.io/f/xzzgypry" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="john.doe@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                    <p id="form-status" style="margin-top: 1rem;"></p>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer"><div class="container"><div class="social-links"><a href="https://github.com/findbene" target="_blank" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/byka" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="#" target="_blank" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div><p>© 2024 Biniyam Kebede. All Rights Reserved.</p></div></footer>
@@ -168,9 +176,6 @@
             }
         });
         const faders=document.querySelectorAll('.fade-in');const appearOptions={threshold:0.2,rootMargin:"0px 0px -50px 0px"};const appearOnScroll=new IntersectionObserver(function(e,t){e.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');t.unobserve(e.target)})},appearOptions);faders.forEach(e=>{appearOnScroll.observe(e)});
-        
-        // FIX: Resume download is now handled by the direct HTML 'download' attribute.
-        // This JavaScript block for the resume has been removed to simplify the code.
         
         const form=document.querySelector('.contact-form');async function handleSubmit(e){e.preventDefault();const t=document.getElementById('form-status'),o=new FormData(e.target);try{const n=await fetch(e.target.action,{method:form.method,body:o,headers:{'Accept':'application/json'}});if(n.ok){t.innerHTML="Thanks for your submission!";form.reset()}else{const a=await n.json();t.innerHTML=a.errors?a.errors.map(e=>e.message).join(", "):"Oops! There was a problem."}}catch(r){t.innerHTML="Oops! There was a problem submitting your form"}}form.addEventListener("submit",handleSubmit);const projectCards=document.querySelectorAll('.project-card');projectCards.forEach(e=>{e.addEventListener('click',()=>{const t=e.getAttribute('data-modal-id');if(t)document.getElementById(t)?.showModal()})});const dialogs=document.querySelectorAll('dialog');dialogs.forEach(e=>{e.addEventListener('click',t=>{if(t.target===e)e.close()})});const experienceSpan=document.getElementById('years-experience'),startDate=new Date('2016-01-01'),years=(new Date).getFullYear()-startDate.getFullYear();if(years>0)experienceSpan.textContent=`${years}+`;
     });
