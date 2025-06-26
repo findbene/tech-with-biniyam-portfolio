@@ -75,7 +75,30 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header"><nav class="nav-container"><div class="logo">Biniyam Kebede</div><ul class="nav-menu"><li><a href="#about" class="nav-link">About</a></li><li><a href="#skills" class="nav-link">Skills</a></li><li><a href="#projects" class="nav-link">Projects</a></li><li><a href="#experience" class="nav-link">Experience</a></li><li><a href="#contact" class="nav-link">Contact</a></li></ul><div class="nav-right-cluster"><div class="theme-switch-wrapper"><label class="theme-switch" for="checkbox"><input type="checkbox" id="checkbox" /><div class="slider round"></div></label></div><a href="#" class="resume-btn" id="resume-download-btn"><i class="fas fa-download"></i> Resume</a></div></nav></header>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">Biniyam Kebede</div>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-right-cluster">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+                <!-- FIX: Replaced with the direct HTML download link as you suggested. -->
+                <a href="./Biniyam_Kebede_Resume.pdf" class="resume-btn" download>
+                    <i class="fas fa-download"></i> Resume
+                </a>
+            </div>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -147,21 +170,9 @@
         });
         const faders=document.querySelectorAll('.fade-in');const appearOptions={threshold:0.2,rootMargin:"0px 0px -50px 0px"};const appearOnScroll=new IntersectionObserver(function(e,t){e.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');t.unobserve(e.target)})},appearOptions);faders.forEach(e=>{appearOnScroll.observe(e)});
         
-        // FIX: Resume download path is now corrected to the exact filename.
-        const resumeBtn=document.getElementById('resume-download-btn');
-        resumeBtn.addEventListener('click',e=>{
-            e.preventDefault();
-            // This path will work because it's in the same folder as index.html
-            const resumeUrl = './Biniyam_Kebede_Resume.pdf'; 
-            // The download attribute suggests the filename to the browser.
-            const link = document.createElement('a');
-            link.href = resumeUrl;
-            link.download = 'Biniyam_Kebede_Resume.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        });
-
+        // FIX: Resume download is now handled by the direct HTML 'download' attribute.
+        // This JavaScript block is no longer needed for the resume button.
+        
         const form=document.querySelector('.contact-form');async function handleSubmit(e){e.preventDefault();const t=document.getElementById('form-status'),o=new FormData(e.target);try{const n=await fetch(e.target.action,{method:form.method,body:o,headers:{'Accept':'application/json'}});if(n.ok){t.innerHTML="Thanks for your submission!";form.reset()}else{const a=await n.json();t.innerHTML=a.errors?a.errors.map(e=>e.message).join(", "):"Oops! There was a problem."}}catch(r){t.innerHTML="Oops! There was a problem submitting your form"}}form.addEventListener("submit",handleSubmit);const projectCards=document.querySelectorAll('.project-card');projectCards.forEach(e=>{e.addEventListener('click',()=>{const t=e.getAttribute('data-modal-id');if(t)document.getElementById(t)?.showModal()})});const dialogs=document.querySelectorAll('dialog');dialogs.forEach(e=>{e.addEventListener('click',t=>{if(t.target===e)e.close()})});const experienceSpan=document.getElementById('years-experience'),startDate=new Date('2016-01-01'),years=(new Date).getFullYear()-startDate.getFullYear();if(years>0)experienceSpan.textContent=`${years}+`;
     });
     </script>
