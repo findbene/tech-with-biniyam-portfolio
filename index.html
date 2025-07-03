@@ -5,28 +5,216 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biniyam Kebede - Data Engineering Professional</title>
     <meta name="description" content="Professional Data Engineer specializing in AWS, Python, Snowflake, and Power Platform solutions.">
+    
+    <!-- Google Fonts: Poppins for a modern, clean look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* 
+         * =============================================
+         * CSS Variables & Theming
+         * =============================================
+        */
         :root {
-            --primary-color: #00bcd4; --accent-color: #ff4081; --text-primary: #eeeeee; --text-secondary: #b0bec5; --bg-primary: #121212; --bg-secondary: #1e1e1e; --bg-dark: #000000; --gradient: linear-gradient(135deg, #00bcd4 0%, #ff4081 100%); --shadow: 0 10px 25px rgba(0,0,0,0.3); --border-radius: 12px;
+            --primary-color: #00bcd4;
+            --accent-color: #ff4081;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0bec5;
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-dark: #000000;
+            --gradient: linear-gradient(135deg, #00bcd4 0%, #ff4081 100%);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            --border-radius: 12px;
+            --font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body.light-mode {
-            --primary-color: #007acc; --accent-color: #f39c12; --text-primary: #333333; --text-secondary: #6b7280; --bg-primary: #ffffff; --bg-secondary: #f5f5f5; --bg-dark: #1e1e2f; --gradient: linear-gradient(135deg, #007acc 0%, #f39c12 100%); --shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --primary-color: #007acc;
+            --accent-color: #f39c12;
+            --text-primary: #333333;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --bg-dark: #eef2f5; 
+            --gradient: linear-gradient(135deg, #007acc 0%, #f39c12 100%);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-primary); background: var(--bg-primary); transition: background 0.3s, color 0.3s; }
-        .header { position: fixed; top: 0; width: 100%; background: rgba(18, 18, 18, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; box-shadow: 0 2px 20px rgba(0,0,0,0.2); transition: all 0.3s ease; }
-        body.light-mode .header { background: rgba(255, 255, 255, 0.85); box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
-        .nav-menu { display: flex; list-style: none; gap: 2rem; }
-        .nav-link { text-decoration: none; color: var(--text-primary); font-weight: 500; transition: color 0.3s ease; position: relative; }
-        .nav-link:hover { color: var(--primary-color); }
-        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--primary-color); transition: width 0.3s ease; }
-        .nav-link:hover::after { width: 100%; }
-        .nav-right-cluster { display: flex; align-items: center; gap: 1.5rem; }
+
+        /* 
+         * =============================================
+         * General & Base Styles
+         * =============================================
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* 
+         * =============================================
+         * Header & Navigation
+         * =============================================
+        */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .header {
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-right-cluster {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .resume-btn {
+            background: var(--gradient);
+            color: white;
+            padding: .6rem 1.25rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all .3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .resume-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        /* Mobile Navigation */
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* 
+         * =============================================
+         * Theme Switcher
+         * =============================================
+        */
         .theme-switch-wrapper { display: flex; align-items: center; }
         .theme-switch { display: inline-block; height: 24px; position: relative; width: 48px; }
         .theme-switch input { display:none; }
@@ -34,112 +222,826 @@
         .slider:before { background-color: #fff; bottom: 4px; content: ""; height: 16px; left: 4px; position: absolute; transition: .4s; width: 16px; border-radius: 50%; }
         input:checked + .slider { background-color: var(--primary-color); }
         input:checked + .slider:before { transform: translateX(24px); }
-        .project-modal { border: none; border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 2rem; max-width: 800px; width: 90%; background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--bg-secondary); }
-        .project-modal::backdrop { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); }
-        .project-modal-close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); }
-        .modal-content .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin: 1rem 0; border-radius: var(--border-radius); }
-        .modal-content .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .modal-content h3 { color: var(--primary-color); margin-bottom: 1rem; }
+
+        /* 
+         * =============================================
+         * Hero Section
+         * =============================================
+        */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 160px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            border: 8px solid rgba(255, 255, 255, .2);
+            background-size: cover;
+            background-position: center;
+            transition: all .3s ease;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+        }
+        .profile-photo:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, .5);
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: .9;
+            font-weight: 400;
+        }
+        .hero .description {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            opacity: .85;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all .3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            border: 2px solid transparent;
+        }
+        .btn-primary {
+            background: rgba(255, 255, 255, .1);
+            color: white;
+            border-color: rgba(255, 255, 255, .3);
+        }
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, .2);
+            transform: translateY(-3px);
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--bg-dark);
+        }
+        body.light-mode .btn-secondary {
+            color: #333;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            background: #f0f0f0;
+        }
+        
+        /* 
+         * =============================================
+         * About Section
+         * =============================================
+        */
+        #about .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        #about .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        #about .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform .3s ease, border-color .3s ease;
+            border: 1px solid var(--bg-secondary);
+        }
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: .9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 
+         * =============================================
+         * Skills Section
+         * =============================================
+        */
+        #skills .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .skill-category {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform .3s ease, border-color .3s ease;
+            border: 1px solid var(--bg-secondary);
+        }
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+        .skill-tag {
+            background: var(--bg-secondary);
+            padding: .5rem 1rem;
+            border-radius: 20px;
+            font-size: .9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: all .3s ease;
+        }
+        .skill-tag:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 
+         * =============================================
+         * Projects Section & Modals
+         * =============================================
+        */
+        #projects .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        .project-card {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all .3s ease;
+            cursor: pointer;
+            border: 1px solid var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .3);
+            border-color: var(--primary-color);
+        }
+        .project-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: .5rem;
+            color: var(--text-primary);
+        }
+        .project-category {
+            color: var(--primary-color);
+            font-size: .9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+        .tech-tag {
+            background: var(--bg-secondary);
+            padding: .25rem .75rem;
+            border-radius: 15px;
+            font-size: .8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .project-modal {
+            border: none;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            max-width: 800px;
+            width: 90%;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--bg-secondary);
+        }
+        .project-modal::backdrop {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+        }
+        .project-modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .project-modal-close-btn:hover {
+            color: var(--accent-color);
+            transform: rotate(90deg);
+        }
+        .modal-content h3 { color: var(--primary-color); margin-bottom: 1rem; font-size: 1.8rem; }
+        .modal-content h4 { color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 1rem; }
+        .modal-content p { color: var(--text-secondary); margin-bottom: 1rem; }
         .modal-content ul { list-style-position: inside; padding-left: 1rem; }
-        .modal-content li { margin-bottom: 0.5rem; }
-        .resume-btn{background:var(--gradient);color:white;padding:.75rem 1.5rem;border-radius:var(--border-radius);text-decoration:none;font-weight:600;transition:all .3s ease;box-shadow:var(--shadow)}.resume-btn:hover{transform:translateY(-2px);box-shadow:0 15px 35px rgba(0,0,0,.2)}.hero{background:var(--gradient);color:white;padding:120px 0 80px;text-align:center;position:relative;overflow:hidden}
-        .profile-photo{width:270px; height:270px; border-radius:50%; margin:0 auto 2rem; border:8px solid rgba(255,255,255,.3); background-size:cover; background-position:center; transition:all .3s ease}.profile-photo:hover{transform:scale(1.05);border-color:rgba(255,255,255,.5)}
-        .hero h1{font-size:3.5rem;margin-bottom:1rem;font-weight:700;animation:fadeInUp 1s ease}.hero .subtitle{font-size:1.3rem;margin-bottom:2rem;opacity:.9;animation:fadeInUp 1s ease .2s both}.hero .description{font-size:1.1rem;max-width:600px;margin:0 auto 2rem;opacity:.8;animation:fadeInUp 1s ease .4s both}.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1s ease .6s both}.btn{padding:1rem 2rem;border-radius:var(--border-radius);text-decoration:none;font-weight:600;transition:all .3s ease;display:inline-flex;align-items:center;gap:.5rem; border: 2px solid transparent;}
-        .btn-primary{background:rgba(255,255,255,.1);color:white;border-color:rgba(255,255,255,.3)}.btn-primary:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}.btn-secondary{background:white;color:var(--bg-dark);}.btn-secondary:hover{transform:translateY(-2px);box-shadow:var(--shadow); background: #eee;}
-        .section{padding:80px 0}.section:nth-child(even){background:var(--bg-secondary)}
-        .container{max-width:1200px;margin:0 auto;padding:0 2rem}.section-title{text-align:center;font-size:2.5rem;font-weight:700;margin-bottom:3rem;color:var(--text-primary);position:relative}.section-title::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:var(--gradient);border-radius:2px}.about-content{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:center}.about-text{font-size:1.1rem;line-height:1.8;margin-bottom:2rem}.about-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}.stat-item{text-align:center;padding:1.5rem;background:var(--bg-primary);border-radius:var(--border-radius);box-shadow:var(--shadow);transition:transform .3s ease; border: 1px solid var(--bg-secondary);}.stat-item:hover{transform:translateY(-5px); border-color: var(--primary-color);}.stat-number{font-size:2rem;font-weight:700;color:var(--primary-color);display:block}.stat-label{color:var(--text-secondary);font-size:.9rem}.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-bottom:3rem}.skill-category{background:var(--bg-primary);padding:2rem;border-radius:var(--border-radius);box-shadow:var(--shadow);transition:transform .3s ease; border: 1px solid var(--bg-secondary);}.skill-category:hover{transform:translateY(-5px); border-color: var(--primary-color);}.skill-category h3{color:var(--primary-color);margin-bottom:1.5rem;font-size:1.3rem;display:flex;align-items:center;gap:.5rem}.skill-list{display:flex;flex-wrap:wrap;gap:.5rem}.skill-tag{background:var(--bg-secondary);padding:.5rem 1rem;border-radius:20px;font-size:.9rem;color:var(--text-primary);border:2px solid transparent;transition:all .3s ease}.skill-tag:hover{border-color:var(--accent-color);background:var(--accent-color);color:white}.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem}.project-card{background:var(--bg-primary);border-radius:var(--border-radius);overflow:hidden;box-shadow:var(--shadow);transition:all .3s ease; cursor: pointer; border: 1px solid var(--bg-secondary);}.project-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,.25); border-color: var(--primary-color);}.project-image{height:200px;background-size: cover; background-position: center; display:flex;align-items:center;justify-content:center;color:white;font-size:3rem;}.project-content{padding:1.5rem}.project-title{font-size:1.3rem;font-weight:600;margin-bottom:.5rem;color:var(--text-primary)}.project-category{color:var(--primary-color);font-size:.9rem;font-weight:500;margin-bottom:1rem}.project-description{color:var(--text-secondary);line-height:1.6;margin-bottom:1rem}.project-tech{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}.tech-tag{background:var(--bg-secondary);padding:.25rem .75rem;border-radius:15px;font-size:.8rem;color:var(--text-secondary)}.project-links{display:flex;gap:1rem}.project-link{color:var(--primary-color);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.25rem;font-size:.9rem}.project-link:hover{color: var(--accent-color); text-decoration:underline;}
-        .timeline{max-width:800px;margin:0 auto; position: relative; padding-left: 30px;}.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:4px;background:var(--bg-secondary);border-radius:2px;}.timeline-item{background:var(--bg-primary);padding:2rem;border-radius:var(--border-radius);box-shadow:var(--shadow);margin-bottom:2rem;position:relative;transition:transform .3s ease; border: 1px solid var(--bg-secondary);}.timeline-item:hover{transform:translateX(10px); border-color: var(--primary-color);}.timeline-item::before{content:'';position:absolute;left:-30px;top:2rem;width:20px;height:20px;background:var(--primary-color);border-radius:50%;border: 4px solid var(--bg-secondary);}.timeline-date{color:var(--primary-color);font-weight:600;font-size:.9rem;margin-bottom:.5rem}.timeline-title{font-size:1.3rem;font-weight:600;margin-bottom:.5rem}.timeline-company{color:var(--text-secondary);font-weight:500;margin-bottom:1rem}.timeline-description{color:var(--text-secondary);line-height:1.6}
-        .contact { background:var(--bg-dark); color:white; padding: 100px 0; }
-        .contact .section-title { color: white; text-shadow: 0 0 8px var(--primary-color); }
-        .contact-content { display:grid; grid-template-columns:1fr 1fr; gap:4rem; }
-        .contact-info h3 { margin-bottom: 1rem; color: var(--primary-color); font-size: 1.5rem; }
-        .contact-info p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; }
-        .contact-link { text-decoration: none; color: #e0e0e0; }
-        .contact-item { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-secondary); border-radius: var(--border-radius); border: 2px solid var(--primary-color); box-shadow: 0 0 12px -4px var(--primary-color); transition: all 0.3s ease; }
-        .contact-item:hover { background: var(--primary-color); color: var(--bg-dark); transform: translateY(-3px); }
-        .contact-item:hover i { color: var(--bg-dark); }
-        .contact-item i { color: var(--primary-color); font-size: 1.8rem; transition: color 0.3s ease; }
-        .contact-item span { font-size: 1.1rem; font-weight: 500; }
-        .contact-form { display:grid; gap:1.5rem; }
-        .form-group { display:grid; gap:0.5rem; }
-        .form-group label { font-weight: 700; font-size: 1.1rem; color: var(--primary-color); }
-        .form-control { padding: 1rem; border-radius: var(--border-radius); background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem; border: 2px solid #555; transition: border-color 0.3s, box-shadow 0.3s; }
-        body.light-mode .form-control { border-color: #ccc; }
-        .form-control:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 10px -2px var(--accent-color); }
-        .form-control::placeholder { color:var(--text-secondary); }
-        textarea.form-control { resize:vertical; min-height:120px; }
-        .submit-btn{background:var(--gradient);color:white;padding:1rem 2rem;border:none;border-radius:var(--border-radius);font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s ease}.submit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.3)}
-        .footer{background:var(--bg-dark);color:rgba(255,255,255,.8);text-align:center;padding:2rem 0;border-top:1px solid #333;}
-        .social-links{display:flex;justify-content:center;gap:1rem;margin-bottom:1rem}.social-link{display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;background:var(--bg-secondary);color:white;border-radius:50%;text-decoration:none;transition:all .3s ease; border: 1px solid #444;}
-        .social-link:hover{background:var(--accent-color);transform:translateY(-3px); border-color: var(--accent-color);}
-        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.fade-in{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}.fade-in.visible{opacity:1;transform:translateY(0)}@media (max-width:768px){.nav-menu{display:none}.hero h1{font-size:2.5rem}.hero .subtitle{font-size:1.1rem}.about-content{grid-template-columns:1fr;gap:2rem}.about-stats{grid-template-columns:1fr}.contact-content{grid-template-columns:1fr;gap:2rem}.cta-buttons{flex-direction:column;align-items:center}.timeline-item:hover{transform:none}}@media (max-width:480px){.container,.nav-container{padding:0 1rem}.hero{padding:100px 0 60px}.section{padding:60px 0}.projects-grid,.skills-grid{grid-template-columns:1fr}}
+        .modal-content li { margin-bottom: 0.75rem; color: var(--text-secondary); }
+        .modal-content .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin: 1.5rem 0; border-radius: var(--border-radius); }
+        .modal-content .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .project-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        .project-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* 
+         * =============================================
+         * Experience Timeline
+         * =============================================
+        */
+        #experience .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding-left: 40px;
+        }
+        #experience .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2.5rem;
+            position: relative;
+            transition: transform .3s ease, border-color .3s ease;
+            border: 1px solid var(--bg-secondary);
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item:hover {
+            transform: translateX(10px);
+            border-color: var(--primary-color);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 32px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 4px solid var(--bg-primary);
+            z-index: 1;
+        }
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: .9rem;
+            margin-bottom: .5rem;
+        }
+        .timeline-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: .25rem;
+        }
+        .timeline-company {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* 
+         * =============================================
+         * Contact Section
+         * =============================================
+        */
+        #contact {
+            background: var(--bg-dark);
+        }
+        body.light-mode #contact {
+            background: var(--bg-secondary);
+        }
+        #contact .section-title {
+            color: var(--text-primary);
+        }
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+        .contact-info p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .contact-link {
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+        body.light-mode .contact-item {
+            background: var(--bg-primary);
+        }
+        .contact-item:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .contact-item:hover i,
+        .contact-item:hover span {
+            color: white;
+        }
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            transition: color 0.3s ease;
+            width: 30px;
+            text-align: center;
+        }
+        .contact-item span {
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: grid;
+            gap: 0.5rem;
+        }
+        .form-control {
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            border: 2px solid transparent;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: var(--font-family);
+        }
+        body.light-mode .form-control {
+            background: var(--bg-primary);
+            border-color: #ddd;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px -2px var(--accent-color);
+        }
+        .form-control::placeholder {
+            color: var(--text-secondary);
+        }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .3);
+        }
+        #form-status {
+            margin-top: 1rem;
+            font-weight: 500;
+            min-height: 1.5em;
+        }
+
+        /* 
+         * =============================================
+         * Footer
+         * =============================================
+        */
+        .footer {
+            background: var(--bg-dark);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid #333;
+        }
+        body.light-mode .footer {
+            border-top: 1px solid #ddd;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all .3s ease;
+            font-size: 1.2rem;
+        }
+        body.light-mode .social-link {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .social-link:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* 
+         * =============================================
+         * Utility & Animation
+         * =============================================
+        */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .6s ease-out, transform .6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Staggered animation for list items */
+        .fade-in-stagger {
+             opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* 
+         * =============================================
+         * Responsive Design (Media Queries)
+         * =============================================
+        */
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 3rem;
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+            .nav-menu.active {
+                right: 0;
+            }
+            .nav-toggle {
+                display: block;
+                z-index: 1001; /* Above nav menu */
+            }
+            .resume-btn {
+                display: none; /* Hide in nav bar, show in mobile menu */
+            }
+            .nav-menu .resume-btn {
+                display: inline-flex;
+            }
+
+            #about .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .hero .subtitle { font-size: 1.2rem; }
+            #about .about-stats { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .timeline-item:hover { transform: none; }
+        }
+
+        @media (max-width: 480px) {
+            .container, .nav-container { padding: 0 1rem; }
+            .hero { padding: 120px 0 60px; }
+            .hero h1 { font-size: 2.5rem; }
+            .section { padding: 80px 0; }
+            .projects-grid, #skills .skills-grid { grid-template-columns: 1fr; }
+        }
+
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header"><nav class="nav-container"><div class="logo">Biniyam Kebede</div><ul class="nav-menu"><li><a href="#about" class="nav-link">About</a></li><li><a href="#skills" class="nav-link">Skills</a></li><li><a href="#projects" class="nav-link">Projects</a></li><li><a href="#experience" class="nav-link">Experience</a></li><li><a href="#contact" class="nav-link">Contact</a></li></ul><div class="nav-right-cluster"><div class="theme-switch-wrapper"><label class="theme-switch" for="checkbox"><input type="checkbox" id="checkbox" /><div class="slider round"></div></label></div><a href="./Biniyam_Kebede_Resume.pdf" class="resume-btn" download><i class="fas fa-download"></i> Resume</a></div></nav></header>
+    <!-- ======================= Header ======================= -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">Biniyam Kebede</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="./Biniyam_Kebede_Resume.pdf" class="resume-btn" download><i class="fas fa-download"></i> Resume</a></li>
+            </ul>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="profile-photo" style="background-image: url('Head-shot.jpg');"></div>
-            <h1>Biniyam Kebede</h1>
-            <p class="subtitle">Cloud-Certified Data Engineer</p>
-            <p class="description">Building scalable, automated data pipelines using Python, SQL, & AWS. Transforming raw data into actionable insights through advanced engineering solutions.</p>
-            <div class="cta-buttons"><a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View Projects</a><a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Get In Touch</a></div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section"><div class="container"><h2 class="section-title">About Me</h2><div class="about-content"><div class="about-stats"><div class="stat-item fade-in"><span class="stat-number" id="years-experience">8+</span><span class="stat-label">Years Experience</span></div><div class="stat-item fade-in"><span class="stat-number">7</span><span class="stat-label">Major Projects</span></div><div class="stat-item fade-in"><span class="stat-number">15+</span><span class="stat-label">Technologies Mastered</span></div><div class="stat-item fade-in"><span class="stat-number">3</span><span class="stat-label">Cloud Certifications</span></div></div><div><p class="about-text fade-in">I'm a cloud-certified Data Engineer with extensive experience in building scalable, automated data pipelines using Python, SQL, and AWS. My expertise spans across real-time data processing, ETL/ELT pipeline development, and comprehensive business intelligence solutions using the Microsoft Power Platform.</p><p class="about-text fade-in">With a strong background in both technical implementation and business collaboration, I specialize in transforming complex data challenges into elegant solutions that drive measurable business value. From HIPAA-compliant healthcare systems to high-volume e-commerce analytics, I deliver reliable, scalable data infrastructure that empowers data-driven decision making.</p></div></div></div></section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section"><div class="container"><h2 class="section-title">Technical Skills</h2><div class="skills-grid"><div class="skill-category fade-in"><h3><i class="fas fa-database"></i> Data Engineering</h3><div class="skill-list"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Apache Spark</span><span class="skill-tag">Apache Kafka</span><span class="skill-tag">Apache Airflow</span><span class="skill-tag">ETL/ELT</span><span class="skill-tag">PySpark</span><span class="skill-tag">Pandas</span><span class="skill-tag">FastAPI</span><span class="skill-tag">Boto3</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">Docker</span><span class="skill-tag">dbt</span><span class="skill-tag">Data Modeling</span><span class="skill-tag">Data Warehousing</span><span class="skill-tag">Git</span><span class="skill-tag">CI/CD</span></div></div><div class="skill-category fade-in"><h3><i class="fas fa-cloud"></i> Cloud Platforms</h3><div class="skill-list"><span class="skill-tag">AWS S3</span><span class="skill-tag">AWS Lambda</span><span class="skill-tag">AWS EMR</span><span class="skill-tag">AWS Kinesis</span><span class="skill-tag">AWS API Gateway</span><span class="skill-tag">AWS Redshift</span><span class="skill-tag">AWS Step Functions</span><span class="skill-tag">AWS SNS</span><span class="skill-tag">AWS SQS</span><span class="skill-tag">AWS IAM</span><span class="skill-tag">Snowflake</span><span class="skill-tag">Azure</span></div></div><div class="skill-category fade-in"><h3><i class="fas fa-bolt"></i> Power Platform & BI</h3><div class="skill-list"><span class="skill-tag">Power BI</span><span class="skill-tag">DAX</span><span class="skill-tag">Power Query</span><span class="skill-tag">Microsoft Power Platform</span><span class="skill-tag">Data Visualization</span><span class="skill-tag">Business Intelligence</span><span class="skill-tag">Dashboard Development</span><span class="skill-tag">KPI Development</span><span class="skill-tag">Self-Service Analytics</span></div></div><div class="skill-category fade-in"><h3><i class="fas fa-cogs"></i> Additional Technologies</h3><div class="skill-list"><span class="skill-tag">HTML/CSS</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Data Quality & Validation</span><span class="skill-tag">Star Schema</span><span class="skill-tag">Real-Time Processing</span><span class="skill-tag">Batch Processing</span><span class="skill-tag">OOP Principles</span><span class="skill-tag">HIPAA Compliance</span><span class="skill-tag">PowerShell</span><span class="skill-tag">Bash</span><span class="skill-tag">Jira</span></div></div></div></div></section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                
-                <div class="project-card fade-in" data-modal-id="project1-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Cloud Data Pipeline</div><h3 class="project-title">Event-Driven Data Ingestion and Processing Pipeline (AWS)</h3><p class="project-description">Designed a scalable, event-driven data pipeline using AWS services to handle real-time streaming data.</p><div class="project-tech"><span class="tech-tag">AWS Lambda</span><span class="tech-tag">API Gateway</span><span class="tech-tag">S3</span><span class="tech-tag">SQS</span><span class="tech-tag">Boto3</span></div></div></div>
-                <div class="project-card fade-in" data-modal-id="project2-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2000');"></div><div class="project-content"><div class="project-category">ETL & Data Quality</div><h3 class="project-title">ETL Modernization & Data Quality Enhancement with dbt and Snowflake</h3><p class="project-description">Built a modular data transformation workflow using dbt to convert raw Snowflake data into clean, analytics-ready models.</p><div class="project-tech"><span class="tech-tag">dbt</span><span class="tech-tag">Snowflake</span><span class="tech-tag">SQL</span><span class="tech-tag">Git</span></div></div></div>
-                <div class="project-card fade-in" data-modal-id="project3-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Business Intelligence</div><h3 class="project-title">Interactive BI Dashboard for Sales Analytics</h3><p class="project-description">Integrated Power BI with Snowflake to develop a dynamic sales analytics dashboard, reducing ad-hoc reporting needs by 30%.</p><div class="project-tech"><span class="tech-tag">Power BI</span><span class="tech-tag">DAX</span><span class="tech-tag">Power Query</span><span class="tech-tag">Snowflake</span></div></div></div>
-                <div class="project-card fade-in" data-modal-id="project4-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Data Engineering & Analytics</div><h3 class="project-title">Real-Time E-commerce Analytics Platform</h3><p class="project-description">End-to-end platform processing millions of daily events for demand forecasting and fraud detection.</p><div class="project-tech"><span class="tech-tag">Kafka</span><span class="tech-tag">Spark</span><span class="tech-tag">Airflow</span><span class="tech-tag">dbt</span><span class="tech-tag">Snowflake</span></div></div></div>
-                <div class="project-card fade-in" data-modal-id="project5-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Healthcare Data & BI</div><h3 class="project-title">Scalable Clinical Data Warehouse & Patient Monitoring System</h3><p class="project-description">HIPAA-compliant data platform processing terabytes of EHR data to improve patient care decisions.</p><div class="project-tech"><span class="tech-tag">AWS</span><span class="tech-tag">Snowflake</span><span class="tech-tag">Power BI</span><span class="tech-tag">dbt</span></div></div></div>
-                <div class="project-card fade-in" data-modal-id="project6-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000');"></div><div class="project-content"><div class="project-category">API Development & Serverless</div><h3 class="project-title">Serverless API for Real-Time Data Access</h3><p class="project-description">Developed a secure, high-performance RESTful API to serve data models from Snowflake.</p><div class="project-tech"><span class="tech-tag">FastAPI</span><span class="tech-tag">Lambda</span><span class="tech-tag">API Gateway</span><span class="tech-tag">Docker</span></div></div></div>
-                <!-- FIX: The 7th project is now correctly placed in the grid. -->
-                <div class="project-card fade-in" data-modal-id="project7-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600880292210-85938a987419?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Power Platform / Video Demo</div><h3 class="project-title">Power Platform Solution for Animal Rescue & Shelter</h3><p class="project-description">A live video demonstration showcasing an end-to-end business solution built with the Microsoft Power Platform.</p><div class="project-tech"><span class="tech-tag">Power Apps</span><span class="tech-tag">Power Automate</span><span class="tech-tag">Power BI</span></div></div></div>
-
+            <div class="nav-right-cluster">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+                <a href="./Biniyam_Kebede_Resume.pdf" class="resume-btn" download><i class="fas fa-download"></i> Resume</a>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
-        </div>
-    </section>
+        </nav>
+    </header>
 
-    <!-- Experience & Education Section -->
-    <section id="experience" class="section"><div class="container"><h2 class="section-title">Experience & Education</h2><div class="timeline"><div class="timeline-item fade-in"><div class="timeline-date">2020 - Present</div><h3 class="timeline-title">Senior Data Engineer</h3><div class="timeline-company">Tech Solutions Inc.</div><p class="timeline-description">Lead engineer on the cloud data platform team. Architected and maintained ETL/ELT pipelines processing terabytes of data daily. Collaborated with stakeholders to define data requirements and deliver BI solutions.</p></div><div class="timeline-item fade-in"><div class="timeline-date">Current</div><h3 class="timeline-title">AWS Certified Cloud Practitioner</h3><div class="timeline-company">Amazon Web Services (CLF-C02)</div><p class="timeline-description">Comprehensive understanding of AWS cloud services, architecture principles, and best practices.</p></div><div class="timeline-item fade-in"><div class="timeline-date">Current</div><h3 class="timeline-title">Microsoft Certified: Azure Fundamentals</h3><div class="timeline-company">Microsoft (AZ-900)</div><p class="timeline-description">Foundational knowledge of cloud services and Azure platform capabilities for data solutions.</p></div><div class="timeline-item fade-in"><div class="timeline-date">Bachelor's Degree</div><h3 class="timeline-title">Bachelor of Science in Applied Physics</h3><div class="timeline-company">Addis Ababa University, Ethiopia</div><p class="timeline-description">Minor in Mathematics. Strong foundation in analytical thinking and problem-solving.</p></div></div></div></section>
+    <main>
+        <!-- ======================= Hero Section ======================= -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="profile-photo" style="background-image: url('Head-shot.jpg');"></div>
+                <h1 class="fade-in">Biniyam Kebede</h1>
+                <p class="subtitle fade-in" style="transition-delay: 0.2s;">Cloud-Certified Data Engineer</p>
+                <p class="description fade-in" style="transition-delay: 0.4s;">Building scalable, automated data pipelines using Python, SQL, & AWS. Transforming raw data into actionable insights through advanced engineering solutions.</p>
+                <div class="cta-buttons fade-in" style="transition-delay: 0.6s;">
+                    <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
+                    <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= About Section ======================= -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">About Me</h2>
+                <div class="about-content">
+                    <div class="about-stats">
+                        <div class="stat-item fade-in-stagger"><span class="stat-number" id="years-experience">8+</span><span class="stat-label">Years Experience</span></div>
+                        <div class="stat-item fade-in-stagger"><span class="stat-number">7</span><span class="stat-label">Major Projects</span></div>
+                        <div class="stat-item fade-in-stagger"><span class="stat-number">15+</span><span class="stat-label">Technologies Mastered</span></div>
+                        <div class="stat-item fade-in-stagger"><span class="stat-number">3</span><span class="stat-label">Cloud Certifications</span></div>
+                    </div>
+                    <div class="fade-in">
+                        <p class="about-text">I'm a cloud-certified Data Engineer with extensive experience in building scalable, automated data pipelines using Python, SQL, and AWS. My expertise spans across real-time data processing, ETL/ELT pipeline development, and comprehensive business intelligence solutions using the Microsoft Power Platform.</p>
+                        <p class="about-text">With a strong background in both technical implementation and business collaboration, I specialize in transforming complex data challenges into elegant solutions that drive measurable business value. From HIPAA-compliant healthcare systems to high-volume e-commerce analytics, I deliver reliable, scalable data infrastructure that empowers data-driven decision making.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= Skills Section ======================= -->
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category fade-in-stagger"><h3><i class="fas fa-database"></i> Data Engineering</h3><div class="skill-list"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Apache Spark</span><span class="skill-tag">Apache Kafka</span><span class="skill-tag">Apache Airflow</span><span class="skill-tag">ETL/ELT</span><span class="skill-tag">PySpark</span><span class="skill-tag">Pandas</span><span class="skill-tag">FastAPI</span><span class="skill-tag">Boto3</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">Docker</span><span class="skill-tag">dbt</span><span class="skill-tag">Data Modeling</span><span class="skill-tag">Data Warehousing</span><span class="skill-tag">Git</span><span class="skill-tag">CI/CD</span></div></div>
+                    <div class="skill-category fade-in-stagger"><h3><i class="fas fa-cloud"></i> Cloud Platforms</h3><div class="skill-list"><span class="skill-tag">AWS S3</span><span class="skill-tag">AWS Lambda</span><span class="skill-tag">AWS EMR</span><span class="skill-tag">AWS Kinesis</span><span class="skill-tag">AWS API Gateway</span><span class="skill-tag">AWS Redshift</span><span class="skill-tag">AWS Step Functions</span><span class="skill-tag">AWS SNS</span><span class="skill-tag">AWS SQS</span><span class="skill-tag">AWS IAM</span><span class="skill-tag">Snowflake</span><span class="skill-tag">Azure</span></div></div>
+                    <div class="skill-category fade-in-stagger"><h3><i class="fas fa-bolt"></i> Power Platform & BI</h3><div class="skill-list"><span class="skill-tag">Power BI</span><span class="skill-tag">DAX</span><span class="skill-tag">Power Query</span><span class="skill-tag">Microsoft Power Platform</span><span class="skill-tag">Data Visualization</span><span class="skill-tag">Business Intelligence</span><span class="skill-tag">Dashboard Development</span><span class="skill-tag">KPI Development</span><span class="skill-tag">Self-Service Analytics</span></div></div>
+                    <div class="skill-category fade-in-stagger"><h3><i class="fas fa-cogs"></i> Additional Technologies</h3><div class="skill-list"><span class="skill-tag">HTML/CSS</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Data Quality & Validation</span><span class="skill-tag">Star Schema</span><span class="skill-tag">Real-Time Processing</span><span class="skill-tag">Batch Processing</span><span class="skill-tag">OOP Principles</span><span class="skill-tag">HIPAA Compliance</span><span class="skill-tag">PowerShell</span><span class="skill-tag">Bash</span><span class="skill-tag">Jira</span></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= Projects Section ======================= -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card fade-in-stagger" data-modal-id="project1-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Cloud Data Pipeline</div><h3 class="project-title">Event-Driven Data Ingestion and Processing Pipeline (AWS)</h3><p class="project-description">Designed a scalable, event-driven data pipeline using AWS services to handle real-time streaming data.</p><div class="project-tech"><span class="tech-tag">AWS Lambda</span><span class="tech-tag">API Gateway</span><span class="tech-tag">S3</span><span class="tech-tag">SQS</span><span class="tech-tag">Boto3</span></div></div></div>
+                    <div class="project-card fade-in-stagger" data-modal-id="project2-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2000');"></div><div class="project-content"><div class="project-category">ETL & Data Quality</div><h3 class="project-title">ETL Modernization & Data Quality Enhancement with dbt and Snowflake</h3><p class="project-description">Built a modular data transformation workflow using dbt to convert raw Snowflake data into clean, analytics-ready models.</p><div class="project-tech"><span class="tech-tag">dbt</span><span class="tech-tag">Snowflake</span><span class="tech-tag">SQL</span><span class="tech-tag">Git</span></div></div></div>
+                    <div class="project-card fade-in-stagger" data-modal-id="project3-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Business Intelligence</div><h3 class="project-title">Interactive BI Dashboard for Sales Analytics</h3><p class="project-description">Integrated Power BI with Snowflake to develop a dynamic sales analytics dashboard, reducing ad-hoc reporting needs by 30%.</p><div class="project-tech"><span class="tech-tag">Power BI</span><span class="tech-tag">DAX</span><span class="tech-tag">Power Query</span><span class="tech-tag">Snowflake</span></div></div></div>
+                    <div class="project-card fade-in-stagger" data-modal-id="project4-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Data Engineering & Analytics</div><h3 class="project-title">Real-Time E-commerce Analytics Platform</h3><p class="project-description">End-to-end platform processing millions of daily events for demand forecasting and fraud detection.</p><div class="project-tech"><span class="tech-tag">Kafka</span><span class="tech-tag">Spark</span><span class="tech-tag">Airflow</span><span class="tech-tag">dbt</span><span class="tech-tag">Snowflake</span></div></div></div>
+                    <div class="project-card fade-in-stagger" data-modal-id="project5-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Healthcare Data & BI</div><h3 class="project-title">Scalable Clinical Data Warehouse & Patient Monitoring System</h3><p class="project-description">HIPAA-compliant data platform processing terabytes of EHR data to improve patient care decisions.</p><div class="project-tech"><span class="tech-tag">AWS</span><span class="tech-tag">Snowflake</span><span class="tech-tag">Power BI</span><span class="tech-tag">dbt</span></div></div></div>
+                    <div class="project-card fade-in-stagger" data-modal-id="project6-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000');"></div><div class="project-content"><div class="project-category">API Development & Serverless</div><h3 class="project-title">Serverless API for Real-Time Data Access</h3><p class="project-description">Developed a secure, high-performance RESTful API to serve data models from Snowflake.</p><div class="project-tech"><span class="tech-tag">FastAPI</span><span class="tech-tag">Lambda</span><span class="tech-tag">API Gateway</span><span class="tech-tag">Docker</span></div></div></div>
+                    <div class="project-card fade-in-stagger" data-modal-id="project7-modal"><div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600880292210-85938a987419?q=80&w=2000');"></div><div class="project-content"><div class="project-category">Power Platform / Video Demo</div><h3 class="project-title">Power Platform Solution for Animal Rescue & Shelter</h3><p class="project-description">A live video demonstration showcasing an end-to-end business solution built with the Microsoft Power Platform.</p><div class="project-tech"><span class="tech-tag">Power Apps</span><span class="tech-tag">Power Automate</span><span class="tech-tag">Power BI</span></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= Experience & Education Section ======================= -->
+        <section id="experience" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Experience & Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item fade-in-stagger"><div class="timeline-date">2020 - Present</div><h3 class="timeline-title">Senior Data Engineer</h3><div class="timeline-company">Tech Solutions Inc.</div><p class="timeline-description">Lead engineer on the cloud data platform team. Architected and maintained ETL/ELT pipelines processing terabytes of data daily. Collaborated with stakeholders to define data requirements and deliver BI solutions.</p></div>
+                    <div class="timeline-item fade-in-stagger"><div class="timeline-date">Current</div><h3 class="timeline-title">AWS Certified Cloud Practitioner</h3><div class="timeline-company">Amazon Web Services (CLF-C02)</div><p class="timeline-description">Comprehensive understanding of AWS cloud services, architecture principles, and best practices.</p></div>
+                    <div class="timeline-item fade-in-stagger"><div class="timeline-date">Current</div><h3 class="timeline-title">Microsoft Certified: Azure Fundamentals</h3><div class="timeline-company">Microsoft (AZ-900)</div><p class="timeline-description">Foundational knowledge of cloud services and Azure platform capabilities for data solutions.</p></div>
+                    <div class="timeline-item fade-in-stagger"><div class="timeline-date">Bachelor's Degree</div><h3 class="timeline-title">Bachelor of Science in Applied Physics</h3><div class="timeline-company">Addis Ababa University, Ethiopia</div><p class="timeline-description">Minor in Mathematics. Strong foundation in analytical thinking and problem-solving.</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ======================= Contact Section ======================= -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Get In Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info fade-in-stagger">
+                        <h3>Contact Information</h3>
+                        <p>I'm currently open to new opportunities. Feel free to reach out via email, phone, or connect with me on LinkedIn.</p>
+                        <a href="mailto:findbene@gmail.com" class="contact-link"><div class="contact-item"><i class="fas fa-envelope"></i><span>findbene@gmail.com</span></div></a>
+                        <a href="https://www.linkedin.com/in/byka" target="_blank" rel="noopener noreferrer" class="contact-link"><div class="contact-item"><i class="fab fa-linkedin"></i><span>linkedin.com/in/byka</span></div></a>
+                        <a href="tel:+14046030407" class="contact-link"><div class="contact-item"><i class="fas fa-phone"></i><span>+1 (404) 603-0407</span></div></a>
+                    </div>
+                    <form class="contact-form fade-in-stagger" action="https://formspree.io/f/mjkrjbrw" method="POST">
+                        <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required></div>
+                        <div class="form-group"><label for="email">Your Email</label><input type="email" id="email" name="email" class="form-control" placeholder="john.doe@email.com" required></div>
+                        <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" class="form-control" placeholder="Your message here..." required></textarea></div>
+                        <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                        <p id="form-status"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
     
-    <!-- Contact Section -->
-    <section id="contact" class="section contact"><div class="container"><h2 class="section-title">Get In Touch</h2><div class="contact-content"><div class="contact-info"><h3>Contact Information</h3><p>I'm currently open to new opportunities. Feel free to reach out via email, phone, or connect with me on LinkedIn.</p><a href="mailto:findbene@gmail.com" class="contact-link"><div class="contact-item"><i class="fas fa-envelope"></i><span>findbene@gmail.com</span></div></a><a href="https://www.linkedin.com/in/byka" target="_blank" rel="noopener noreferrer" class="contact-link"><div class="contact-item"><i class="fab fa-linkedin"></i><span>linkedin.com/in/byka</span></div></a><a href="tel:+14046030407" class="contact-link"><div class="contact-item"><i class="fas fa-phone"></i><span>+1 (404) 603-0407</span></div></a></div><form class="contact-form" action="https://formspree.io/f/mjkrjbrw" method="POST"><div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required></div><div class="form-group"><label for="email">Your Email</label><input type="email" id="email" name="email" class="form-control" placeholder="john.doe@email.com" required></div><div class="form-group"><label for="message">Message</label><textarea id="message" name="message" class="form-control" placeholder="Your message here..." required></textarea></div><button type="submit" class="submit-btn">Send Message</button><p id="form-status" style="margin-top: 1rem;"></p></form></div></div></section>
+    <!-- ======================= Footer ======================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/findbene" target="_blank" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/byka" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>© <span id="current-year">2024</span> Biniyam Kebede. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-    <!-- Footer -->
-    <footer class="footer"><div class="container"><div class="social-links"><a href="https://github.com/findbene" target="_blank" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/byka" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="#" target="_blank" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div><p>© 2024 Biniyam Kebede. All Rights Reserved.</p></div></footer>
+    <!-- ======================= Project Modals ======================= -->
+    <dialog id="project1-modal" class="project-modal"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()" aria-label="Close dialog">×</button><div class="modal-content"><h3>Event-Driven Data Ingestion and Processing Pipeline (AWS)</h3><p>Designed a scalable, event-driven data pipeline using AWS services to handle real-time streaming data. Used Lambda functions for data validation, transformation, and cleansing, with SQS for decoupling and durability. Final structured data was stored in Snowflake for immediate analytics.</p><h4>Key Features & Outcomes:</h4><ul><li>Architected a scalable, serverless pipeline to ingest real-time data streams via an AWS API Gateway endpoint.</li><li>Engineered an AWS Lambda function to process and validate incoming data, placing valid records onto an SQS queue to ensure data durability and decouple ingestion from processing.</li><li>Developed a second Lambda function, triggered by the SQS queue, to perform final data transformation and cleansing before storing the structured data in a Snowflake data warehouse via its Python connector.</li><li>This event-driven architecture ensures high availability and low-latency processing for real-time analytics needs.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
+    <dialog id="project2-modal" class="project-modal"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()" aria-label="Close dialog">×</button><div class="modal-content"><h3>ETL Modernization & Data Quality Enhancement with dbt and Snowflake</h3><p>Built a modular data transformation workflow using dbt to convert raw Snowflake data into clean, analytics-ready models. Automated data quality checks reduced manual validation by 95% and improved data integrity. Optimized transformations into star schema boosted BI query performance by 40%.</p><h4>Key Features & Outcomes:</h4><ul><li>Developed a modular data transformation project using dbt to build analytics-ready data models from raw data stored in Snowflake.</li><li>Wrote custom data quality tests in dbt (e.g., uniqueness, not null, accepted values) to automate data validation, leading to a 95% reduction in manual validation efforts and ensuring high data integrity.</li><li>Implemented dbt models to transform complex, multi-source data into a clean, star-schema format, improving query performance for BI tools by an estimated 40%.</li><li>Managed the project with Git for version control, following best practices for branching, commits, and pull requests.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
+    <dialog id="project3-modal" class="project-modal"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()" aria-label="Close dialog">×</button><div class="modal-content"><h3>Interactive BI Dashboard for Sales Analytics</h3><p>Integrated Power BI with Snowflake to develop a dynamic sales analytics dashboard. Leveraged Power Query for data transformation and advanced DAX to calculate key performance metrics. Enabled self-service insights for stakeholders, reducing ad-hoc reporting needs by 30%.</p><h4>Key Features & Outcomes:</h4><ul><li>Connected Power BI to a Snowflake data warehouse to build a comprehensive sales analytics solution.</li><li>Utilized Power Query to clean, transform, and model complex datasets. Wrote advanced DAX calculations to create critical KPIs like YTD revenue, customer acquisition cost, and regional performance.</li><li>Designed a multi-page interactive dashboard that allowed business stakeholders to perform self-service analytics, reducing requests for ad-hoc reports by 30%.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
+    <dialog id="project4-modal" class="project-modal"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()" aria-label="Close dialog">×</button><div class="modal-content"><h3>Real-Time E-commerce Analytics & Demand Forecasting Platform</h3><p>Architected an end-to-end data platform to process millions of daily e-commerce events from Kafka streams, REST APIs, and batch files. This platform directly solved key business challenges in demand forecasting and fraud detection.</p><h4>Key Features & Outcomes:</h4><ul><li>Engineered a data transformation process with Apache Spark that reduced order processing time from 4 hours to 30 minutes.</li><li>Built clean, reliable data models in Snowflake using dbt, which led to a 10% increase in conversion rates.</li><li>Implemented a comprehensive data quality framework with dbt tests, improving data accuracy by 20%.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
+    <dialog id="project5-modal" class="project-modal"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()" aria-label="Close dialog">×</button><div class="modal-content"><h3>Scalable Clinical Data Warehouse & Patient Monitoring System</h3><p>Designed and deployed a HIPAA-compliant data platform on AWS to centralize and process terabytes of patient electronic health records (EHR), directly addressing the business need for improved patient outcomes and operational efficiency.</p><h4>Key Features & Outcomes:</h4><ul><li>Built and maintained critical batch data pipelines that achieved 99.9% uptime, ensuring reliable access to patient data.</li><li>Implemented a cost-effective data warehousing strategy using Snowflake, which reduced annual data storage costs by 15%.</li><li>Delivered automated monitoring dashboards in Power BI to optimize hospital operations and lower patient care costs.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
+    <dialog id="project6-modal" class="project-modal"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()" aria-label="Close dialog">×</button><div class="modal-content"><h3>Serverless API for Real-Time Data Access</h3><p>Developed a secure, high-performance RESTful API using Python (FastAPI) to provide internal teams with programmatic access to customer and patient data models stored in Snowflake.</p><h4>Key Features & Outcomes:</h4><ul><li>Deployed the API as a serverless application using AWS Lambda and API Gateway, ensuring automatic scaling to handle thousands of requests per minute with zero infrastructure management.</li><li>Directly supported real-time applications built by other teams, providing reliable and fast data access.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
+    <dialog id="project7-modal" class="project-modal"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()" aria-label="Close dialog">×</button><div class="modal-content"><h3>Power Platform Solution for Animal Rescue & Shelter</h3><p>Paw & Heart is an animal rescue charity that operates animal shelters and liaises with local families to foster animals in need. The goal is to help every pet to get the veterinary care they need and to find their foster families. This video demonstrates the Microsoft Power Platform solution built to streamline their operations.</p><h4>Video Demo:</h4><div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/joa5y_bmMeI?si=DIG1pT0ZjkW9I-TV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><h4>Key Features & Outcomes:</h4><ul><li>Improve record-keeping on animals staying at their shelters and foster homes.</li><li>Make it easier for foster families to provide support.</li><li>Provide the social media team with insightful reports to help them encourage more people to foster a pet.</li></ul></div></dialog>
 
-    <!-- Project Modals -->
-    <dialog id="project1-modal" class="project-modal"><div class="modal-content"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()">×</button><h3>Event-Driven Data Ingestion and Processing Pipeline (AWS)</h3><p>Designed a scalable, event-driven data pipeline using AWS services to handle real-time streaming data. Used Lambda functions for data validation, transformation, and cleansing, with SQS for decoupling and durability. Final structured data was stored in Snowflake for immediate analytics.</p><h4>Key Features & Outcomes:</h4><ul><li>Architected a scalable, serverless pipeline to ingest real-time data streams via an AWS API Gateway endpoint.</li><li>Engineered an AWS Lambda function to process and validate incoming data, placing valid records onto an SQS queue to ensure data durability and decouple ingestion from processing.</li><li>Developed a second Lambda function, triggered by the SQS queue, to perform final data transformation and cleansing before storing the structured data in a Snowflake data warehouse via its Python connector.</li><li>This event-driven architecture ensures high availability and low-latency processing for real-time analytics needs.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
-    <dialog id="project2-modal" class="project-modal"><div class="modal-content"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()">×</button><h3>ETL Modernization & Data Quality Enhancement with dbt and Snowflake</h3><p>Built a modular data transformation workflow using dbt to convert raw Snowflake data into clean, analytics-ready models. Automated data quality checks reduced manual validation by 95% and improved data integrity. Optimized transformations into star schema boosted BI query performance by 40%.</p><h4>Key Features & Outcomes:</h4><ul><li>Developed a modular data transformation project using dbt to build analytics-ready data models from raw data stored in Snowflake.</li><li>Wrote custom data quality tests in dbt (e.g., uniqueness, not null, accepted values) to automate data validation, leading to a 95% reduction in manual validation efforts and ensuring high data integrity.</li><li>Implemented dbt models to transform complex, multi-source data into a clean, star-schema format, improving query performance for BI tools by an estimated 40%.</li><li>Managed the project with Git for version control, following best practices for branching, commits, and pull requests.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
-    <dialog id="project3-modal" class="project-modal"><div class="modal-content"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()">×</button><h3>Interactive BI Dashboard for Sales Analytics</h3><p>Integrated Power BI with Snowflake to develop a dynamic sales analytics dashboard. Leveraged Power Query for data transformation and advanced DAX to calculate key performance metrics. Enabled self-service insights for stakeholders, reducing ad-hoc reporting needs by 30%.</p><h4>Key Features & Outcomes:</h4><ul><li>Connected Power BI to a Snowflake data warehouse to build a comprehensive sales analytics solution.</li><li>Utilized Power Query to clean, transform, and model complex datasets. Wrote advanced DAX calculations to create critical KPIs like YTD revenue, customer acquisition cost, and regional performance.</li><li>Designed a multi-page interactive dashboard that allowed business stakeholders to perform self-service analytics, reducing requests for ad-hoc reports by 30%.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
-    <dialog id="project4-modal" class="project-modal"><div class="modal-content"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()">×</button><h3>Real-Time E-commerce Analytics & Demand Forecasting Platform</h3><p>Architected an end-to-end data platform to process millions of daily e-commerce events from Kafka streams, REST APIs, and batch files. This platform directly solved key business challenges in demand forecasting and fraud detection.</p><h4>Key Features & Outcomes:</h4><ul><li>Engineered a data transformation process with Apache Spark that reduced order processing time from 4 hours to 30 minutes.</li><li>Built clean, reliable data models in Snowflake using dbt, which led to a 10% increase in conversion rates.</li><li>Implemented a comprehensive data quality framework with dbt tests, improving data accuracy by 20%.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
-    <dialog id="project5-modal" class="project-modal"><div class="modal-content"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()">×</button><h3>Scalable Clinical Data Warehouse & Patient Monitoring System</h3><p>Designed and deployed a HIPAA-compliant data platform on AWS to centralize and process terabytes of patient electronic health records (EHR), directly addressing the business need for improved patient outcomes and operational efficiency.</p><h4>Key Features & Outcomes:</h4><ul><li>Built and maintained critical batch data pipelines that achieved 99.9% uptime, ensuring reliable access to patient data.</li><li>Implemented a cost-effective data warehousing strategy using Snowflake, which reduced annual data storage costs by 15%.</li><li>Delivered automated monitoring dashboards in Power BI to optimize hospital operations and lower patient care costs.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
-    <dialog id="project6-modal" class="project-modal"><div class="modal-content"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()">×</button><h3>Serverless API for Real-Time Data Access</h3><p>Developed a secure, high-performance RESTful API using Python (FastAPI) to provide internal teams with programmatic access to customer and patient data models stored in Snowflake.</p><h4>Key Features & Outcomes:</h4><ul><li>Deployed the API as a serverless application using AWS Lambda and API Gateway, ensuring automatic scaling to handle thousands of requests per minute with zero infrastructure management.</li><li>Directly supported real-time applications built by other teams, providing reliable and fast data access.</li></ul><a href="https://github.com/findbene" class="project-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></div></dialog>
-    <dialog id="project7-modal" class="project-modal"><div class="modal-content"><button class="project-modal-close-btn" onclick="this.closest('dialog').close()">×</button><h3>Power Platform Solution for Animal Rescue & Shelter</h3><p>Paw & Heart is an animal rescue charity that operates animal shelters and liaises with local families to foster animals in need. The goal is to help every pet to get the veterinary care they need and to find their foster families. This video demonstrates the Microsoft Power Platform solution built to streamline their operations.</p><h4>Video Demo:</h4><div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/joa5y_bmMeI?si=DIG1pT0ZjkW9I-TV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><h4>Key Features & Outcomes:</h4><ul><li>Improve record-keeping on animals staying at their shelters and foster homes.</li><li>Make it easier for foster families to provide support.</li><li>Provide the social media team with insightful reports to help them encourage more people to foster a pet.</li></ul></div></dialog>
-
+    <!-- ======================= Utilities ======================= -->
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+    
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- Theme Switcher ---
         const themeToggle = document.getElementById('checkbox');
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme === 'light-mode') {
             document.body.classList.add('light-mode');
-            themeToggle.checked = true;
+            if(themeToggle) themeToggle.checked = true;
         }
         themeToggle.addEventListener('change', function() {
             if (this.checked) {
@@ -150,9 +1052,163 @@
                 localStorage.setItem('theme', 'dark-mode');
             }
         });
-        const faders=document.querySelectorAll('.fade-in');const appearOptions={threshold:0.2,rootMargin:"0px 0px -50px 0px"};const appearOnScroll=new IntersectionObserver(function(e,t){e.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');t.unobserve(e.target)})},appearOptions);faders.forEach(e=>{appearOnScroll.observe(e)});
         
-        const form=document.querySelector('.contact-form');async function handleSubmit(e){e.preventDefault();const t=document.getElementById('form-status'),o=new FormData(e.target);try{const n=await fetch(e.target.action,{method:form.method,body:o,headers:{'Accept':'application/json'}});if(n.ok){t.innerHTML="Thanks for your submission!";form.reset()}else{const a=await n.json();t.innerHTML=a.errors?a.errors.map(e=>e.message).join(", "):"Oops! There was a problem."}}catch(r){t.innerHTML="Oops! There was a problem submitting your form"}}form.addEventListener("submit",handleSubmit);const projectCards=document.querySelectorAll('.project-card');projectCards.forEach(e=>{e.addEventListener('click',()=>{const t=e.getAttribute('data-modal-id');if(t)document.getElementById(t)?.showModal()})});const dialogs=document.querySelectorAll('dialog');dialogs.forEach(e=>{e.addEventListener('click',t=>{if(t.target===e)e.close()})});const experienceSpan=document.getElementById('years-experience'),startDate=new Date('2016-01-01'),years=(new Date).getFullYear()-startDate.getFullYear();if(years>0)experienceSpan.textContent=`${years}+`;
+        // --- Mobile Navigation ---
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = navMenu.querySelectorAll('.nav-link');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                // Toggle hamburger icon
+                const icon = navToggle.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Close menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    const icon = navToggle.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                });
+            });
+        }
+        
+        // --- Intersection Observer for Fade-in Animations ---
+        const faders = document.querySelectorAll('.fade-in');
+        const staggerFaders = document.querySelectorAll('.fade-in-stagger');
+
+        const appearOptions = {
+            threshold: 0.2,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // Staggered animation observer
+        staggerFaders.forEach((fader, index) => {
+            fader.style.transitionDelay = `${index * 100}ms`;
+            appearOnScroll.observe(fader);
+        });
+
+        // --- Animated Counter for Experience ---
+        const experienceCounter = document.getElementById('years-experience');
+        const animateCounter = (element) => {
+            const startYear = 2016;
+            const currentYear = new Date().getFullYear();
+            const target = currentYear - startYear;
+            element.innerText = '0+';
+
+            let start = 0;
+            const duration = 1500; // ms
+            const stepTime = Math.abs(Math.floor(duration / target));
+
+            const timer = setInterval(() => {
+                start += 1;
+                element.innerText = `${start}+`;
+                if (start === target) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
+        };
+        
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.8 });
+        
+        if(experienceCounter) counterObserver.observe(experienceCounter);
+
+
+        // --- Contact Form Submission ---
+        const form = document.querySelector('.contact-form');
+        const formStatus = document.getElementById('form-status');
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            try {
+                const response = await fetch(event.target.action, {
+                    method: form.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    formStatus.textContent = "Thanks for your submission! I'll be in touch soon.";
+                    formStatus.style.color = 'var(--primary-color)';
+                    form.reset();
+                } else {
+                    const responseData = await response.json();
+                    if (Object.hasOwn(responseData, 'errors')) {
+                        formStatus.textContent = responseData.errors.map(error => error.message).join(", ");
+                    } else {
+                        formStatus.textContent = "Oops! There was a problem submitting your form.";
+                    }
+                    formStatus.style.color = 'var(--accent-color)';
+                }
+            } catch (error) {
+                formStatus.textContent = "Oops! There was a problem submitting your form.";
+                formStatus.style.color = 'var(--accent-color)';
+            }
+        }
+        if (form) form.addEventListener("submit", handleSubmit);
+
+        // --- Project Modals ---
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const modalId = card.getAttribute('data-modal-id');
+                if (modalId) {
+                    const dialog = document.getElementById(modalId);
+                    if (dialog) dialog.showModal();
+                }
+            });
+        });
+
+        // Close dialog on backdrop click
+        const dialogs = document.querySelectorAll('dialog');
+        dialogs.forEach(dialog => {
+            dialog.addEventListener('click', (event) => {
+                if (event.target === dialog) {
+                    dialog.close();
+                }
+            });
+        });
+
+        // --- Back to Top Button ---
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        // --- Dynamic Year in Footer ---
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
     });
     </script>
 </body>
