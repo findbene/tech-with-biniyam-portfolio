@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -62,21 +62,29 @@
 
         /* 
          * =============================================
-         * Header & Navigation
+         * UPDATED: Header & Navigation
          * =============================================
         */
         .header { position: fixed; top: 0; width: 100%; background: rgba(18, 18, 18, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2); transition: all 0.3s ease; }
         body.light-mode .header { background: rgba(255, 255, 255, 0.85); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
-        .nav-menu { display: flex; list-style: none; gap: 2rem; } /* Adjusted gap */
-        .nav-link { text-decoration: none; color: var(--text-primary); font-weight: 500; transition: color 0.3s ease; position: relative; padding-bottom: 5px; font-size: 0.95rem; } /* Adjusted font-size */
-        .nav-link:hover { color: var(--primary-color); }
-        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--primary-color); transition: width 0.3s ease; }
-        .nav-link:hover::after { width: 100%; }
+        .logo { font-size: 1.6rem; font-weight: 700; color: var(--text-primary); text-decoration: none; letter-spacing: 0.5px; transition: color 0.3s ease; }
+        .logo:hover { color: var(--primary-color); }
+
+        .nav-menu { display: flex; list-style: none; gap: 2.8rem; }
+        .nav-link { text-decoration: none; color: var(--text-secondary); font-weight: 600; transition: all 0.3s ease; position: relative; padding-bottom: 8px; font-size: 1rem; }
+        .nav-link:hover { color: var(--primary-color); transform: translateY(-2px); }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px; background: var(--primary-color); border-radius: 2px; transition: width 0.3s ease; }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: var(--primary-color); }
+
         .nav-right-cluster { display: flex; align-items: center; gap: 1.5rem; }
         .resume-btn { background: var(--gradient); color: white; padding: .6rem 1.25rem; border-radius: var(--border-radius); text-decoration: none; font-weight: 600; transition: all .3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: inline-flex; align-items: center; gap: 0.5rem; }
         .resume-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        
+        .mobile-resume-btn { display: none; } /* Hide the mobile resume button by default */
+        
         .nav-toggle { display: none; font-size: 1.5rem; background: none; border: none; color: var(--text-primary); cursor: pointer; }
 
         /* Theme Switcher */
@@ -153,7 +161,7 @@
 
         /* 
          * =============================================
-         * Experience, Education Timeline
+         * Experience & Education Timeline
          * =============================================
         */
         .timeline { max-width: 800px; margin: 0 auto; position: relative; padding-left: 40px; }
@@ -171,7 +179,7 @@
         
         /* 
          * =============================================
-         * NEW: Education Details Styles
+         * UPDATED: Education Details Styles
          * =============================================
         */
         .education-details-grid {
@@ -186,6 +194,9 @@
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--bg-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
         }
         .course-list {
             list-style: none;
@@ -197,6 +208,10 @@
             border-radius: calc(var(--border-radius) / 2);
             margin-bottom: 1rem;
             border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+        .course-list-item:hover {
+            transform: translateX(5px);
         }
         .course-list-item strong {
             color: var(--text-primary);
@@ -279,12 +294,17 @@
          * Responsive Design
          * =============================================
         */
+        @media (max-width: 1024px) { /* Adjust breakpoint for nav links */
+            .nav-menu { gap: 1.5rem; }
+            .nav-link { font-size: 0.9rem; }
+        }
+
         @media (max-width: 992px) {
             .nav-menu { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: var(--bg-secondary); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.2); }
             .nav-menu.active { right: 0; }
             .nav-toggle { display: block; z-index: 1001; }
-            .resume-btn { display: none; }
-            .nav-menu .resume-btn { display: inline-flex; }
+            .nav-right-cluster .resume-btn { display: none; } /* Hide desktop button on mobile */
+            .mobile-resume-btn { display: inline-flex; } /* Show mobile button in nav menu */
             #about .about-content, .contact-content, .education-details-grid { grid-template-columns: 1fr; gap: 3rem; }
         }
         @media (max-width: 768px) {
@@ -319,7 +339,8 @@
                 <li><a href="#training" class="nav-link">Training</a></li>
                 <li><a href="#education" class="nav-link">Education</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li><a href="./Biniyam_Kebede_Resume.pdf" class="resume-btn" download><i class="fas fa-download"></i> Resume</a></li>
+                <!-- This resume button will ONLY appear inside the mobile menu -->
+                <li class="mobile-resume-btn"><a href="./Biniyam_Kebede_Resume.pdf" class="resume-btn" download><i class="fas fa-download"></i> Resume</a></li>
             </ul>
             <div class="nav-right-cluster">
                 <div class="theme-switch-wrapper"><label class="theme-switch" for="checkbox"><input type="checkbox" id="checkbox" /><div class="slider round"></div></label></div>
@@ -420,7 +441,7 @@
             </div>
         </section>
 
-        <!-- ======================= UPDATED Education Section ======================= -->
+        <!-- Education Section -->
         <section id="education" class="section">
             <div class="container">
                 <h2 class="section-title fade-in">Education & Foundational Coursework</h2>
@@ -432,8 +453,8 @@
                         <p class="timeline-description">Focused on computational problem-solving, mathematical modeling, and data analysis foundational to Data Engineering.</p>
                         
                         <div class="education-details-grid">
-                            <div class="course-category">
-                                <h4>🧮 Relevant Mathematics Courses</h4>
+                            <div class="course-category fade-in-stagger">
+                                <h4><i class="fas fa-calculator"></i> Mathematics Courses</h4>
                                 <ul class="course-list">
                                     <li class="course-list-item"><strong>Calculus I–III:</strong> Built a solid foundation in continuous optimization and analytical reasoning, used in algorithm development and modeling.</li>
                                     <li class="course-list-item"><strong>Linear Algebra:</strong> Mastered vector spaces, matrices, and eigenvalues—core to data transformations, dimensionality reduction, and ML algorithms.</li>
@@ -443,8 +464,8 @@
                                     <li class="course-list-item"><strong>Numerical Methods:</strong> Solved complex equations computationally, relevant in data cleaning, iterative algorithms, and simulation-based modeling.</li>
                                 </ul>
                             </div>
-                            <div class="course-category">
-                                <h4>🧲 Relevant Physics Courses</h4>
+                            <div class="course-category fade-in-stagger">
+                                <h4><i class="fas fa-atom"></i> Physics Courses</h4>
                                 <ul class="course-list">
                                     <li class="course-list-item"><strong>Computational Physics:</strong> Used Python and MATLAB to simulate physical systems, analyze large datasets, and visualize results—early exposure to programming for data tasks.</li>
                                     <li class="course-list-item"><strong>Statistical Mechanics:</strong> Strengthened understanding of probabilistic systems and entropy—concepts that parallel information theory and data entropy.</li>
@@ -516,9 +537,33 @@
                 icon.classList.toggle('fa-bars');
                 icon.classList.toggle('fa-times');
             });
-            navLinks.forEach(link => link.addEventListener('click', closeMenu));
+            // Also close menu if a nav link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
         }
         
+        // --- NEW: Active Nav Link Highlighting on Scroll ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLi = document.querySelectorAll('.nav-menu li .nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) { // Adjust offset as needed
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLi.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+
         // Intersection Observer for Animations (only if JS is running)
         if (window.IntersectionObserver) {
             const faders = document.querySelectorAll('.fade-in, .fade-in-stagger');
