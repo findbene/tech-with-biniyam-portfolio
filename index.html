@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -218,14 +218,34 @@
         body.light-mode .social-link { background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .social-link:hover { background: var(--accent-color); color: white; transform: translateY(-5px); }
 
-        /* Utility & Animation */
+        /* 
+         * =============================================
+         * Animation & Utility - THE FIX IS HERE
+         * =============================================
+        */
         .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--primary-color); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; text-decoration: none; z-index: 999; opacity: 0; transform: translateY(100px); transition: opacity 0.5s, transform 0.5s; }
         .back-to-top.visible { opacity: 1; transform: translateY(0); }
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity .6s ease-out, transform .6s ease-out; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        .fade-in-stagger { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        
+        /* Animation will ONLY apply if JavaScript is enabled and running */
+        html.js .fade-in,
+        html.js .fade-in-stagger {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .6s ease-out, transform .6s ease-out;
+        }
+        
+        html.js .fade-in.visible,
+        html.js .fade-in-stagger.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        /* Responsive Design */
+
+        /* 
+         * =============================================
+         * Responsive Design
+         * =============================================
+        */
         @media (max-width: 992px) {
             .nav-menu { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: var(--bg-secondary); flex-direction: column; justify-content: center; align-items: center; gap: 3rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.2); }
             .nav-menu.active { right: 0; }
@@ -400,7 +420,12 @@
     <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
     
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+        // THE FIX: Immediately remove 'no-js' and add 'js' to enable CSS-based animations safely.
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+
+        document.addEventListener('DOMContentLoaded', () => {
+        
         // Theme Switcher
         const themeToggle = document.getElementById('checkbox');
         if(themeToggle) {
@@ -434,35 +459,35 @@
             navLinks.forEach(link => link.addEventListener('click', closeMenu));
         }
         
-        // Intersection Observer for Animations
-        const observers = new Map();
-        const createObserver = (options, callback) => {
-            if (!observers.has(options.threshold)) {
-                observers.set(options.threshold, new IntersectionObserver(callback, options));
-            }
-            return observers.get(options.threshold);
-        };
-        const faders = document.querySelectorAll('.fade-in, .fade-in-stagger');
-        const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
-        const appearCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
+        // Intersection Observer for Animations (only if JS is running)
+        if (window.IntersectionObserver) {
+            const faders = document.querySelectorAll('.fade-in, .fade-in-stagger');
+            const appearOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
                     entry.target.classList.add('visible');
                     observer.unobserve(entry.target);
+                });
+            }, appearOptions);
+
+            faders.forEach((fader, index) => {
+                if (fader.classList.contains('fade-in-stagger')) {
+                    fader.style.transitionDelay = `${index * 100}ms`;
                 }
+                appearOnScroll.observe(fader);
             });
-        };
-        const appearOnScroll = createObserver(appearOptions, appearCallback);
-        faders.forEach((fader, index) => {
-            if (fader.classList.contains('fade-in-stagger')) {
-                fader.style.transitionDelay = `${index * 100}ms`;
-            }
-            appearOnScroll.observe(fader);
-        });
+        }
 
         // Animated Counter for Experience
         const experienceCounter = document.getElementById('years-experience');
-        if(experienceCounter){
+        if(experienceCounter && window.IntersectionObserver){
             const animateCounter = (element) => {
                 const startYear = 2016;
                 const target = new Date().getFullYear() - startYear;
@@ -472,17 +497,17 @@
                 const timer = setInterval(() => {
                     start += 1;
                     element.innerText = `${start}+`;
-                    if (start === target) clearInterval(timer);
+                    if (start >= target) clearInterval(timer);
                 }, 1500 / target);
             };
-            const counterObserver = createObserver({ threshold: 0.8 }, (entries, observer) => {
+            const counterObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if(entry.isIntersecting) {
                         animateCounter(entry.target);
                         observer.unobserve(entry.target);
                     }
                 });
-            });
+            }, { threshold: 0.8 });
             counterObserver.observe(experienceCounter);
         }
 
@@ -493,6 +518,8 @@
             const handleSubmit = async (event) => {
                 event.preventDefault();
                 const data = new FormData(event.target);
+                formStatus.textContent = 'Sending...';
+                formStatus.style.color = 'var(--text-secondary)';
                 try {
                     const response = await fetch(event.target.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } });
                     if (response.ok) {
