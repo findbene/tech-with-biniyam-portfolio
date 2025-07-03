@@ -69,8 +69,8 @@
         body.light-mode .header { background: rgba(255, 255, 255, 0.85); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
-        .nav-menu { display: flex; list-style: none; gap: 2.5rem; }
-        .nav-link { text-decoration: none; color: var(--text-primary); font-weight: 500; transition: color 0.3s ease; position: relative; padding-bottom: 5px; }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; } /* Adjusted gap */
+        .nav-link { text-decoration: none; color: var(--text-primary); font-weight: 500; transition: color 0.3s ease; position: relative; padding-bottom: 5px; font-size: 0.95rem; } /* Adjusted font-size */
         .nav-link:hover { color: var(--primary-color); }
         .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--primary-color); transition: width 0.3s ease; }
         .nav-link:hover::after { width: 100%; }
@@ -171,6 +171,41 @@
         
         /* 
          * =============================================
+         * NEW: Education Details Styles
+         * =============================================
+        */
+        .education-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+        }
+        .course-category h4 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--bg-secondary);
+        }
+        .course-list {
+            list-style: none;
+            padding: 0;
+        }
+        .course-list-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: calc(var(--border-radius) / 2);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        .course-list-item strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* 
+         * =============================================
          * Certificates & Training Grid
          * =============================================
         */
@@ -183,7 +218,6 @@
         .credential-issuer { font-style: italic; color: var(--text-secondary); margin-bottom: 0.5rem; }
         .credential-date { font-size: 0.9rem; font-weight: 500; color: var(--primary-color); }
         .credential-details { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem; }
-
 
         /* Contact Section */
         #contact { background: var(--bg-dark); }
@@ -240,19 +274,18 @@
             transform: translateY(0);
         }
 
-
         /* 
          * =============================================
          * Responsive Design
          * =============================================
         */
         @media (max-width: 992px) {
-            .nav-menu { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: var(--bg-secondary); flex-direction: column; justify-content: center; align-items: center; gap: 3rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.2); }
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: var(--bg-secondary); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.2); }
             .nav-menu.active { right: 0; }
             .nav-toggle { display: block; z-index: 1001; }
             .resume-btn { display: none; }
             .nav-menu .resume-btn { display: inline-flex; }
-            #about .about-content, .contact-content { grid-template-columns: 1fr; gap: 3rem; }
+            #about .about-content, .contact-content, .education-details-grid { grid-template-columns: 1fr; gap: 3rem; }
         }
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
@@ -260,6 +293,8 @@
             #about .about-stats { grid-template-columns: 1fr; }
             .cta-buttons { flex-direction: column; align-items: center; }
             .timeline-item:hover { transform: none; }
+            .nav-menu { gap: 2rem; }
+            .nav-link { font-size: 1.1rem; }
         }
         @media (max-width: 480px) {
             .container, .nav-container { padding: 0 1rem; }
@@ -385,16 +420,41 @@
             </div>
         </section>
 
-        <!-- Education Section -->
+        <!-- ======================= UPDATED Education Section ======================= -->
         <section id="education" class="section">
             <div class="container">
-                <h2 class="section-title fade-in">Education</h2>
+                <h2 class="section-title fade-in">Education & Foundational Coursework</h2>
                 <div class="timeline">
                     <div class="timeline-item fade-in-stagger">
-                        <div class="timeline-date">August 05, 2008</div>
-                        <h3 class="timeline-title">Bachelor of Science in Applied Physics</h3>
-                        <div class="timeline-company">Addis Ababa University - Ethiopia</div>
-                        <p class="timeline-description">Minor in Mathematics. Strong foundation in analytical thinking, quantitative reasoning, and complex problem-solving.</p>
+                        <div class="timeline-date">Graduated August 2008</div>
+                        <h3 class="timeline-title">Bachelor of Science in Applied Physics (Minor in Mathematics)</h3>
+                        <div class="timeline-company">Addis Ababa University</div>
+                        <p class="timeline-description">Focused on computational problem-solving, mathematical modeling, and data analysis foundational to Data Engineering.</p>
+                        
+                        <div class="education-details-grid">
+                            <div class="course-category">
+                                <h4>🧮 Relevant Mathematics Courses</h4>
+                                <ul class="course-list">
+                                    <li class="course-list-item"><strong>Calculus I–III:</strong> Built a solid foundation in continuous optimization and analytical reasoning, used in algorithm development and modeling.</li>
+                                    <li class="course-list-item"><strong>Linear Algebra:</strong> Mastered vector spaces, matrices, and eigenvalues—core to data transformations, dimensionality reduction, and ML algorithms.</li>
+                                    <li class="course-list-item"><strong>Probability & Statistics:</strong> Applied statistical inference to analyze distributions, sample data, and uncertainty—key in data analysis and model evaluation.</li>
+                                    <li class="course-list-item"><strong>Differential Equations:</strong> Modeled real-world phenomena using dynamic systems—critical for forecasting, simulations, and trend analysis.</li>
+                                    <li class="course-list-item"><strong>Discrete Mathematics:</strong> Developed skills in logic, graph theory, and combinatorics—essential for data structures and relational databases.</li>
+                                    <li class="course-list-item"><strong>Numerical Methods:</strong> Solved complex equations computationally, relevant in data cleaning, iterative algorithms, and simulation-based modeling.</li>
+                                </ul>
+                            </div>
+                            <div class="course-category">
+                                <h4>🧲 Relevant Physics Courses</h4>
+                                <ul class="course-list">
+                                    <li class="course-list-item"><strong>Computational Physics:</strong> Used Python and MATLAB to simulate physical systems, analyze large datasets, and visualize results—early exposure to programming for data tasks.</li>
+                                    <li class="course-list-item"><strong>Statistical Mechanics:</strong> Strengthened understanding of probabilistic systems and entropy—concepts that parallel information theory and data entropy.</li>
+                                    <li class="course-list-item"><strong>Experimental Physics & Labs:</strong> Designed experiments involving data acquisition, calibration, instrumentation, and real-time analysis—skills directly transferable to data pipelines.</li>
+                                    <li class="course-list-item"><strong>Electromagnetism:</strong> Understood the transmission of signals and energy—connected to data communication and signal processing.</li>
+                                    <li class="course-list-item"><strong>Mathematical Methods in Physics:</strong> Deep experience with applied linear algebra, complex variables, and special functions used in algorithm design.</li>
+                                    <li class="course-list-item"><strong>Fourier Analysis & Signal Processing:</strong> Gained tools for decomposing signals and time-series—essential for real-time analytics and anomaly detection.</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
