@@ -2,7 +2,7 @@
 # Biniyam Kebede's Data Engineering Portfolio
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/[your-linkedin-profile]/">
+  <a href="https://www.linkedin.com/in/byka/">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
    
@@ -47,21 +47,21 @@ Here are some of the platforms I've designed and built. Each project is a deep d
 ### 1. 📈 Real-Time E-commerce Analytics & Demand Forecasting Platform
 *A production-grade streaming and batch data platform designed to process millions of daily events, enabling near real-time inventory management, fraud detection, and personalized marketing.*
 <br> **`[ Kafka ]` `[ Spark ]` `[ Airflow ]` `[ dbt ]` `[ Snowflake ]` `[ AWS ]`**
-<br> **[➡️ View Project Deep-Dive & Code](./link-to-project-1-repo)**
+<br> **[➡️ View Project Deep-Dive & Code](https://github.com/findbene/aws-event-driven-pipeline)**
 
 ---
 
 ### 2. ❤️ Scalable Clinical Data Warehouse & Patient Monitoring System
 *A secure, HIPAA-compliant data warehouse on AWS built to centralize terabytes of patient data. This system achieved 99.9% uptime, empowering clinical staff with timely data for life-saving decisions.*
 <br> **`[ AWS S3 / Lambda ]` `[ Snowflake ]` `[ Power BI ]` `[ Python ]` `[ dbt ]`**
-<br> **[➡️ View Project Deep-Dive & Code](./link-to-project-2-repo)**
+<br> **[➡️ View Project Deep-Dive & Code](https://github.com/findbene/clinical-data-warehouse)**
 
 ---
 
 ### 3. ⚡ Serverless API for Real-Time Data Access
 *A highly available, scalable, and secure RESTful API providing programmatic access to curated data models in Snowflake, serving as a data source for other internal applications.*
 <br> **`[ Python (FastAPI) ]` `[ AWS Lambda ]` `[ API Gateway ]` `[ Docker ]`**
-<br> **[➡️ View Project Deep-Dive & Code](./link-to-project-3-repo)**
+<br> **[➡️ View Project Deep-Dive & Code](https://github.com/findbene/serverless-api-snowflake)**
 
 ---
 
@@ -69,5 +69,5 @@ Here are some of the platforms I've designed and built. Each project is a deep d
 
 I am always excited to discuss data challenges, new technologies, and potential opportunities. Please feel free to reach out!
 
-*   **LinkedIn:** [linkedin.com/in/[your-linkedin-profile]](https://www.linkedin.com/in/[your-linkedin-profile]/)
+*   **LinkedIn:** [linkedin.com/in/byka](https://www.linkedin.com/in/byka/)
 *   **Email:** findbene@gmail.com
